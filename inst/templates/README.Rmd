@@ -1,0 +1,54 @@
+---
+title: "Documentación del proyecto"
+output: github_document
+---
+
+```{r setup, cache = FALSE, include = FALSE}
+options(formatR.arrow = TRUE, width = 90)
+knitr::opts_chunk$set(
+  tidy       = TRUE,
+  prompt     = FALSE,
+  fig.align  = "center",
+  fig.show   = "hold",
+  fig.width  = 10,
+  fig.height = 7,
+  cache      = FALSE,
+  par        = TRUE,
+  comment    = "#",
+  warning    = FALSE,
+  message    = FALSE
+)
+```
+
+## Descripción de los objetivos del proyecto 
+Insertar una breve descripción del proyecto...
+
+
+## Estructura de directorios
+El proyecto se estructura entorno a 4 directorios principales, siendo su contenido:
+
++ r: directorio principal, el cual contiene todos los *scripts* de código R necesarios para la ejecución del proyecto. Solo contiene archivos con extensión `*.R`, cuyo nombre contiene dos dígitos al inicio que identifica el orden de ejecución de los mismos.
++ datos: donde se almacenan los bancos de datos necesarios para el análisis. Se estructura en tres subdirectorios:
+    - brutos: datos **TAL CUAL** se reciben, sin importar su formato (***NUNCA SE MODIFICAN***).
+    - procesados: datos procesados listos para cargar durante el análisis (generados tras ejecutar los *scripts* de lectura y procesado de datos). Preferentemente se utilizará un formato nativo de R (`*.RData`).
+    - documentacion: directorio para guardar toda la documentación asociada al proyecto y facilitada por el cliente, incluyendo un diccionario de variables donde figuran las etiquetas de cada una de ellas.
++ informes: contenido a facilitar al cliente. En la primera reunión se le solicita el formato que se le debe dar, siendo las opciones ODT, PDF y Beamer para presentaciones.
++ presupuestos: directorio que contiene tanto los presupuestos como las notas de cargo o facturas.
+
+Adicionalmente, existen algunos directorios invisibles que no se deben borrar nunca (especialmente los relativos a Git y `renv`).
+
+
+## Propuesta de análisis
+
+Análisis propuesto para alcanzar cada objetivo marcado...
+
+
+## Información del sistema
+
+El proyecto fue creado en las siguientes condiciones:
+
+```{r, info}
+utils::sessionInfo()
+```
+
+Si se desea reproducir el proyecto, es recomendable familiarizarse con el paquete de R [`renv`](https://cran.r-project.org/web/packages/renv/index.html), así como con Git.
