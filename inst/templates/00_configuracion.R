@@ -8,7 +8,9 @@ pkgs <- c(
   "gtsummary",
   "flextable",
   "labelled",
-  "kableExtra"
+  "kableExtra",
+  "here",
+  "git2r"
 )
 
 invisible(

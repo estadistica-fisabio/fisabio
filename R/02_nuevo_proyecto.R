@@ -112,7 +112,7 @@ nuevo_proyecto <- function(nombre_proyecto = NULL, directorio = NULL, git = TRUE
   sub_dirs <- file.path(
     ruta_trabajo,
     c(paste0("datos/", c("brutos", "procesados", "documentacion")),
-      "informes", "r", "presupuestos")
+      paste0("informes/", c("extra", "figuras")), "r", "presupuestos")
   )
   invisible(sapply(sub_dirs, dir.create, recursive = TRUE))
 
@@ -137,16 +137,25 @@ nuevo_proyecto <- function(nombre_proyecto = NULL, directorio = NULL, git = TRUE
   )
   copy_fisabio(
     from_ = "templates/apa.csl",
-    to_   = file.path(ruta_trabajo, "informes/apa.csl")
+    to_   = file.path(ruta_trabajo, "informes/extra/apa.csl")
   )
   copy_fisabio(
     from_ = "templates/vancouver.csl",
-    to_   = file.path(ruta_trabajo, "informes/vancouver.csl")
+    to_   = file.path(ruta_trabajo, "informes/extra/vancouver.csl")
   )
   copy_fisabio(
     from_ = "templates/referencias_prueba.bib",
-    to_   = file.path(ruta_trabajo, "informes/referencias.bib")
+    to_   = file.path(ruta_trabajo, "informes/extra/referencias.bib")
   )
+  # copy_fisabio(
+  #   from_ = "templates/se_fisabio.png",
+  #   to_   = file.path(ruta_trabajo, "informes/extra/se_fisabio.png")
+  # )
+  copy_fisabio(
+    from_ = "templates/fisabio_gva.png",
+    to_   = file.path(ruta_trabajo, "informes/extra/fisabio_gva.png")
+  )
+  file.create(file.path(ruta_trabajo, "informes/figuras/tikzMetrics"), showWarnings = FALSE)
   knitr::knit(
     input    = file.path(ruta_trabajo, "README.Rmd"),
     output   = file.path(ruta_trabajo, "README.md"),
@@ -198,7 +207,7 @@ nuevo_proyecto <- function(nombre_proyecto = NULL, directorio = NULL, git = TRUE
       )
       git2r::config(
         repo       = repo,
-        user.name  = "Servicio de Estudios Estadísticos",
+        user.name  = "Servicio de Estudios Estad\u00edsticos",
         user.email = "estadistica_fisabio@gva.es"
       )
       git2r::add(repo = repo, path = "*")
