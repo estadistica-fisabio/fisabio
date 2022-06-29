@@ -57,7 +57,7 @@ nuevo_proyecto <- function(nombre_proyecto = NULL, directorio = NULL, git = TRUE
     stopifnot(is.character(directorio))
 
     if (!dir.exists(directorio)) {
-      dir.create(directorio, recursive = TRUE)
+      dir.create(directorio, recursive = TRUE, mode = "0777")
     } else {
       dir_info <- sapply(c(0, 2, 4), function(x)
         file.access(names = directorio, mode = x))
@@ -74,24 +74,24 @@ nuevo_proyecto <- function(nombre_proyecto = NULL, directorio = NULL, git = TRUE
   if (is.null(nombre_proyecto)) {
     tmp   <- list.dirs(directorio, full.names = TRUE, recursive = FALSE)
     tmp   <- basename(tmp)
-    misel <- grep("\\d{6}$", tmp)
+    misel <- grep("_\\d{5}$", tmp)
 
     if (length(misel) > 0) {
-      orden           <- regmatches(tmp[misel], regexpr("\\d{4}$", tmp[misel]))
+      orden           <- regmatches(tmp[misel], regexpr(paste0(format(Sys.Date(), "%y"), "\\d{3}$"), tmp[misel]))
       orden           <- as.numeric(orden)
       orden           <- max(orden) + 1
-      orden           <- formatC(orden, digits = 3, flag = "0")
-      nombre_proyecto <- paste0("fisabio_se_", format(Sys.Date(), "%y"), orden)
+      orden           <- formatC(orden, digits = 3, flag = "0", format = "d")
+      nombre_proyecto <- paste0("fisabio_se_", orden)
     } else {
-      nombre_proyecto <- paste0("fisabio_se_", format(Sys.Date(), "%y"), "0001")
+      nombre_proyecto <- paste0("fisabio_se_", format(Sys.Date(), "%y"), "001")
     }
-    dir.create(file.path(directorio, nombre_proyecto))
+    dir.create(file.path(directorio, nombre_proyecto), mode = "0777")
   } else {
     stopifnot(is.character(nombre_proyecto))
     nombre_proyecto <- tolower(nombre_proyecto)
 
     if (!dir.exists(file.path(directorio, nombre_proyecto))) {
-      dir.create(file.path(directorio, nombre_proyecto))
+      dir.create(file.path(directorio, nombre_proyecto), mode = "0777")
     } else {
       stop(
         "\u00a1El directorio que iba a crearse ya existe!",
@@ -114,7 +114,7 @@ nuevo_proyecto <- function(nombre_proyecto = NULL, directorio = NULL, git = TRUE
     c(paste0("datos/", c("brutos", "procesados", "documentacion")),
       paste0("informes/", c("extra", "figuras")), "r", "presupuestos")
   )
-  invisible(sapply(sub_dirs, dir.create, recursive = TRUE))
+  invisible(sapply(sub_dirs, dir.create, recursive = TRUE, mode = "0777"))
 
 
   ############################################################################
@@ -124,7 +124,7 @@ nuevo_proyecto <- function(nombre_proyecto = NULL, directorio = NULL, git = TRUE
   ############################################################################
 
   copy_fisabio(
-    from_ = "templates/proyecto.Rproj",
+    from_ = "templates/proyecto.mipro",
     to_   = file.path(ruta_trabajo, paste0(nombre_proyecto, ".Rproj"))
   )
   copy_fisabio(
@@ -134,6 +134,14 @@ nuevo_proyecto <- function(nombre_proyecto = NULL, directorio = NULL, git = TRUE
   copy_fisabio(
     from_ = "templates/README.Rmd",
     to_   = file.path(ruta_trabajo, "README.Rmd")
+  )
+  copy_fisabio(
+    from_ = "templates/nota_cargo_interno.xlsx",
+    to_   = file.path(ruta_trabajo, paste0("presupuestos/nota_cargo_interno", nombre_proyecto, ".xlsx"))
+  )
+  copy_fisabio(
+    from_ = "templates/presupuesto.xlsx",
+    to_   = file.path(ruta_trabajo, paste0("presupuestos/presupuesto", nombre_proyecto, ".xlsx"))
   )
   copy_fisabio(
     from_ = "templates/apa.csl",
@@ -147,10 +155,10 @@ nuevo_proyecto <- function(nombre_proyecto = NULL, directorio = NULL, git = TRUE
     from_ = "templates/referencias_prueba.bib",
     to_   = file.path(ruta_trabajo, "informes/extra/referencias.bib")
   )
-  # copy_fisabio(
-  #   from_ = "templates/se_fisabio.png",
-  #   to_   = file.path(ruta_trabajo, "informes/extra/se_fisabio.png")
-  # )
+  copy_fisabio(
+    from_ = "templates/se_fisabio.png",
+    to_   = file.path(ruta_trabajo, "informes/extra/se_fisabio.png")
+  )
   copy_fisabio(
     from_ = "templates/fisabio_gva.png",
     to_   = file.path(ruta_trabajo, "informes/extra/fisabio_gva.png")
@@ -202,7 +210,7 @@ nuevo_proyecto <- function(nombre_proyecto = NULL, directorio = NULL, git = TRUE
     } else {
       repo <- git2r::init(ruta_trabajo)
       copy_fisabio(
-        from_ = "templates/.gitignore",
+        from_ = "templates/gitignore_fisabio",
         to_   = file.path(ruta_trabajo, ".gitignore")
       )
       git2r::config(
@@ -229,7 +237,26 @@ nuevo_proyecto <- function(nombre_proyecto = NULL, directorio = NULL, git = TRUE
   ############################################################################
 
   if (renv == TRUE) {
-    renv::init(project = ruta_trabajo, restart = TRUE, bare = TRUE)
+    renv::init(project = ruta_trabajo, restart = FALSE, bare = TRUE)
+    pkgs <- c(
+      "remotes",
+      "rstudioapi",
+      "data.table",
+      "readxl",
+      "lubridate",
+      "markdown",
+      "rmarkdown",
+      "gtsummary",
+      "flextable",
+      "labelled",
+      "kableExtra",
+      "here",
+      "git2r",
+      "tikzDevice",
+      "tinytex",
+      "estadistica-fisabio/fisabio"
+    )
+    renv::install(pkgs)
   }
 
 
@@ -240,9 +267,7 @@ nuevo_proyecto <- function(nombre_proyecto = NULL, directorio = NULL, git = TRUE
   ############################################################################
 
   message("No olvides editar el archivo README para describir el proyecto.")
+
+  Sys.sleep(3)
+  rstudioapi::openProject(file.path(ruta_trabajo, paste0(nombre_proyecto, ".Rproj")))
 }
-
-
-
-
-

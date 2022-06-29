@@ -1,16 +1,13 @@
 ---
 title: "Plantilla de Informe Estadístico"
-first-author: "Carlos Vergara Hernández"
-middle-author:
-  - name: "Aitor Tilla-Fresca"
-last-author: "Paco Jerte-Dell'Ombro"
-affiliation:
-  - name: "Servicio de estudios estadísticos, FISABIO"
-email: "estadistica_fisabio@gva.es"
-date: "Versión 0.0.1 (`r Sys.Date()`)"
-output: fisabio::informe_odt
+output: fisabio::informe_docx
 bibliography: "`r here::here('informes/extra/referencias.bib')`"
 csl: "`r here::here('informes/extra/apa.csl')`"
+params: 
+  autores: "Carlos Vergara Hernández"
+  instituciones: "Servicio de estudios estadísticos, FISABIO"
+  email: "estadistica_fisabio@gva.es"
+  version: "0.0.1"
 ---
 
 ```{r setup, cache=FALSE, include=FALSE}
@@ -18,7 +15,10 @@ csl: "`r here::here('informes/extra/apa.csl')`"
 ##                 NO BORRAR ESTA SECCIÓN                ##
 ###########################################################
 knitr::opts_knit$set(root.dir = here::here())
-options(formatR.arrow = TRUE, width = 70)
+options(
+  formatR.arrow         = TRUE,
+  width                 = 80
+)
 knitr::opts_chunk$set(
   tidy       = FALSE,
   prompt     = FALSE,
@@ -34,10 +34,60 @@ knitr::opts_chunk$set(
   warning    = FALSE,
   message    = FALSE
 )
-###########################################################
-##              DESDE AQUÍ YA PUEDES BORRAR              ##
-###########################################################
+linea_baja <- officer::fp_par(
+  text.align     = "center", 
+  padding.bottom = 20, padding.top = 120, 
+  border.bottom  = officer::fp_border()
+)
+fp_params  <- officer::fp_par(
+  text.align     = "center",
+  padding.bottom = 12,
+  padding.top    = 6
+)
+toc        <- officer::fp_text(
+  bold        = TRUE,
+  font.size   = 14,
+  font.family = "Roboto"
+)
+ft         <- officer::fp_text(
+  font.size   = 10,
+  font.family = "Roboto Light"
+)
 ```
+
+```{r portada_plus, echo = FALSE}
+###########################################################
+## NO BORRAR ESTA SECCIÓN SI SE QUIERE PORTADA           ##
+###########################################################
+officer::fpar(officer::ftext(paste0(params$autores), ft), fp_p = fp_params)
+officer::fpar(officer::ftext(paste0('Versión ', params$version, ' (', Sys.Date(), ')'), ft), fp_p = fp_params)
+officer::fpar(officer::ftext(paste0(params$instituciones), ft), fp_p = fp_params)
+officer::fpar(officer::ftext(paste0(params$email), ft), fp_p = fp_params)
+```
+
+\newpage
+
+
+<!-- Inicio: No borrar esto si se quiere TOC  -->
+
+
+`r officer::ftext("Índice de contenidos", toc)`
+`r linea_baja`
+<!---BLOCK_TOC--->
+
+`r officer::ftext("Índice de figuras", toc)`
+`r linea_baja`
+<!---BLOCK_TOC{seq_id: 'fig'}--->
+
+`r officer::ftext("Índice de tablas", toc)`
+`r linea_baja`
+<!---BLOCK_TOC{seq_id: 'tab'}--->
+
+<!-- Final: No borrar esto si se quiere TOC -->
+
+
+\newpage
+
 
 # Sobre esta plantilla
 Esta es la plantilla base para la elaboración de informes estadísticos en FISABIO. Todo en ella es editable, aunque si tienes alguna sugerencia puedes hacérnosla llegar a través de nuestro repositorio en [GitHub](https://www.github.com/estadistica-fisabio/fisabio).
@@ -63,7 +113,7 @@ knitr::kable(mtcars[1:6, 1:7], digits = 2, align = rep("c", 7), caption = "Esto 
 Para cargar imágenes que no procedan del código incrustado en el propio documento lo mejor es utilizar la función `knitr::include_graphics("ruta/a/la/imagen")` en un _chunk_ de código estándar `knitr::include_graphics("fisabio.png")`, cuyo resultado es:
 
 
-```{r out.height="3.5cm", out.width="4cm", fig.cap = "Reconóceme.."}
+```{r fig.width  = 1, fig.height = 1, fig.cap = "Reconóceme.."}
 knitr::include_graphics(path = here::here("informes/extra/se_fisabio.png"), rel_path = FALSE)
 ```
 

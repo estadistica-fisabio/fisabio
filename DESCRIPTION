@@ -26,11 +26,11 @@ Imports:
     rmarkdown (>= 2.14),
     here (>= 1.0.1),
     renv (>= 0.15.5),
-    remotes (>= 2.4.2)
+    officedown (>= 0.2.4),
+    rstudioapi (>= 0.13)
 Suggest:
     tikzDevice (>= 0.12.3),
     gtsummary (>= 1.6.0),
-    flextable (>= 0.7.2),
-    rstudioapi (>= 0.13)
+    flextable (>= 0.7.2)
 SystemRequirements: git
 RoxygenNote: 7.2.0

@@ -10,7 +10,7 @@ informe_pdf(motor = c("xelatex", "pdftex"), ...)
 \arguments{
 \item{motor}{Motor de LaTeX. XeLaTeX por defecto.}
 
-\item{...}{Otros argumentos a pasar.}
+\item{...}{Otros argumentos a pasar a [rmarkdown::pdf_document].}
 }
 \value{
 Objeto con clase "rmarkdown_output_format".

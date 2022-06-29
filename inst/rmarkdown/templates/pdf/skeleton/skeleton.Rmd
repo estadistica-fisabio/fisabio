@@ -9,7 +9,7 @@ affil:
     number: 1
 version: "0.0.1"
 abstract:
-  Esta es la plantilla base para la elaboración de informes estadísticos en FISABIO. Todo en ella es editable, bien de forma local (cargando paquetes de \LaTeX \space adicionales, cambiando la configuración de la página, o lo que se te pueda ocurrir para mejorar tu documento), o bien de forma genérica (lo que implica modificar no solo esta plantilla --archivo ``.tex``--, sino también compartir tus sugerencias a través de nuestra cuenta de [GitHub](https://www.github.com/fisabio/fisabio).
+  Esta es la plantilla base para la elaboración de informes estadísticos en FISABIO. Todo en ella es editable, aunque si tienes alguna sugerencia puedes hacérnosla llegar a través de nuestro repositorio en [GitHub](https://www.github.com/estadistica-fisabio/fisabio).
 bibliography: "`r here::here('informes/extra/referencias.bib')`"
 csl: "`r here::here('informes/extra/apa.csl')`"
 logo: "`r here::here('informes/extra/fisabio_gva.png')`"
@@ -17,7 +17,7 @@ otherpackages:
   - name: setspace
     options: onehalfspacing
   - name: lipsum
-output: fisabio::informe
+output: fisabio::informe_pdf
 ---
 
 ```{r setup, cache=FALSE, include=FALSE}
@@ -78,7 +78,7 @@ Asimismo, además de figuras (como vimos anteriormente) también podemos crear t
 Para cargar imágenes que no procedan del código incrustado en el propio documento lo mejor es utilizar la función `knitr::include_graphics("ruta/a/la/imagen")` en un _chunk_ de código estándar `knitr::include_graphics("fisabio.png")`, cuyo resultado es:
 
 ```{r out.height="3.5cm", out.width="4cm", fig.align="center", fig.cap = "Reconóceme.."}
-knitr::include_graphics(path = here::here("informes/extra/fisabio.png"), rel_path = FALSE)
+knitr::include_graphics(path = here::here("informes/extra/fisabio_gva.png"), rel_path = FALSE)
 ```
 
 

@@ -47,7 +47,7 @@ comprueba <- function(file_name = NULL, doc_format = NULL) {
 #' usa XeLaTeX como motor de LaTeX (mejor trabajo con fuentes).
 #'
 #' @param motor Motor de LaTeX. XeLaTeX por defecto.
-#' @param ... Otros argumentos a pasar.
+#' @param ... Otros argumentos a pasar a [rmarkdown::pdf_document].
 #' @export
 #'
 #' @details La función solo debe utilizarse desde una llamada a
@@ -56,10 +56,10 @@ comprueba <- function(file_name = NULL, doc_format = NULL) {
 #' @return Objeto con clase "rmarkdown_output_format".
 #'
 informe_pdf <- function(motor = c("xelatex", "pdftex"), ...) {
-
-  motor <- tolower(motor)
-  motor <- match.arg(motor)
-  template <- system.file(
+  este_sitio <- here::here()
+  motor      <- tolower(motor)
+  motor      <- match.arg(motor)
+  template   <- system.file(
     "rmarkdown/templates/pdf/resources/template.tex",
     package = "fisabio"
   )
@@ -81,10 +81,11 @@ informe_pdf <- function(motor = c("xelatex", "pdftex"), ...) {
 #' plantilla base con detalles del grupo.
 #'
 #' @export
-#' @param nombre Cadena de caracteres con el nombre del archivo sin
-#'   extensión. Por defecto, los archivos recibirán el nombre genérico
-#'   \code{informe}.
-#'
+#' @param template Ruta hasta la plantilla del documento. Por defecto se usa la plantilla
+#'   de FISABIO (opción: `default`).
+#' @param template_xml Ruta hasta la plantilla XML de Pandoc. Por defecto se usa la
+#'   plantilla de FISABIO (opción: `default`).
+#' @param ... Otras opciones a usar en [rmarkdown::odt_document].
 #' @details La función solo funciona si el directorio de trabajo se circunscribe
 #'   a un proyecto de RStudio, es decir, si existe un archivo \emph{*.Rproj} en
 #'   el directorio de trabajo. Si el proyecto se ha creado con
@@ -106,43 +107,47 @@ informe_pdf <- function(motor = c("xelatex", "pdftex"), ...) {
 #'
 #' @return Crea un documento principal y un conjunto de documentos de respaldo.
 #'
-#' @examples
-#' \dontrun{
-#' library(fisabio)
-#' nuevo_proyecto(proj_nom = "proyecto_europeo_X",
-#'           proj_dir = "~/proyectos",
-#'           git      = TRUE)
-#'
-#' informe_odt(nombre = "informe_proyecto_x")
-#' }
-informe_odt <- function(nombre = "informe") {
-  comprueba(file_name = nombre, doc_format = "odt")
-  report_path <- paste0("informes/", nombre, ".Rmd")
+informe_odt <- function(template = "default", template_xml = "default", ...) {
 
-  copy_fisabio(
-    from_ = "templates/",
-    to_   = file.path(ruta_trabajo, "informes/extra/referencias.bib")
-  )
+  if (template == "default") {
+    template <- system.file(
+      "rmarkdown/templates/odt/resources/template_fisabio.odt",
+      package = "fisabio"
+    )
+  } else {
+    if (!file.exists(template)) {
+      stop("No se encuentra la plantilla ODT.")
+    } else {
+      if (!grepl("odt$", template)) {
+        stop("El archivo proporcionado no parece una plantilla ODT.")
+      }
+    }
+  }
+  if (template_xml == "default") {
+    template_xml <- system.file(
+      "rmarkdown/templates/odt/resources/template_fisabio_odt.xml",
+      package = "fisabio"
+    )
+  } else {
+    if (!file.exists(template_xml)) {
+      stop("No se encuentra la plantilla ODT.")
+    } else {
+      if (!grepl("xml$", template_xml)) {
+        stop("El archivo proporcionado no parece una plantilla XML de ODT.")
+      }
+    }
+  }
+
   doc_format <- rmarkdown::odt_document(
-    template         = template,
-    latex_engine     = motor,
+    reference_odt    = template,
+    template         = template_xml,
     md_extensions    = "-autolink_bare_uris",
     ...
   )
-  doc_format$inherits <- "pdf_document"
-
+  doc_format$inherits <- "odt_document"
 
   return(doc_format)
-
-  rmarkdown::draft(file = report_path, create_dir = FALSE, template = "odt",
-                   package = "fisabio", edit = FALSE)
-  if (rstudioapi::isAvailable()) {
-    rstudioapi::navigateToFile(report_path)
-  } else {
-    utils::file.edit(report_path)
-  }
 }
-
 
 
 #' Crea un informe estadístico en DOCX -- Markdown
@@ -151,9 +156,9 @@ informe_odt <- function(nombre = "informe") {
 #' plantilla base con detalles del grupo.
 #'
 #' @export
-#' @param file_name Cadena de caracteres con el nombre del archivo sin
-#'   extensión. Por defecto, los archivos recibirán el nombre genérico
-#'   \code{informe}.
+#' @param template Ruta hasta la plantilla del documento. Por defecto se usa la plantilla
+#'   de FISABIO (opción: `default`).
+#' @param ... Otras opciones a usar en [rmarkdown::word_document].
 #'
 #' @details La función solo funciona si el directorio de trabajo se circunscribe
 #'   a un proyecto de RStudio, es decir, si existe un archivo \emph{*.Rproj} en
@@ -178,28 +183,30 @@ informe_odt <- function(nombre = "informe") {
 #'   (algunos directamente en el directorio de informes/docx y otros en los
 #'   directorios de data/cache o figuras/docx).
 #'
-#' @examples
-#' \dontrun{
-#' library(fisabio)
-#' nuevo_proyecto(proj_nom = "proyecto_europeo_X",
-#'           proj_dir = "~/proyectos",
-#'           git      = TRUE)
-#'
-#' informe_docx(file_name = "informe_proyecto_x")
-#' }
-informe_docx <- function(file_name = "informe") {
-  doc_format <- "docx"
-  comprueba(file_name = file_name, doc_format = doc_format)
-  if (!dir.exists("informes/docx"))
-    dir.create("informes/docx", recursive = T)
-  report_path <- paste0("informes/docx/", file_name, ".Rmd")
-  rmarkdown::draft(file = report_path, create_dir = FALSE, template = "docx",
-                   package = "fisabio", edit = FALSE)
-  if (rstudioapi::isAvailable()) {
-    rstudioapi::navigateToFile(report_path)
+informe_docx <- function(template = "default", ...) {
+  if (template == "default") {
+    template <- system.file(
+      "rmarkdown/templates/docx/resources/template_fisabio.docx",
+      package = "fisabio"
+    )
   } else {
-    utils::file.edit(report_path)
+    if (!file.exists(template)) {
+      stop("No se encuentra la plantilla DOCX.")
+    } else {
+      if (!grepl("docx$", template)) {
+        stop("El archivo proporcionado no parece una plantilla DOCX.")
+      }
+    }
   }
+
+  doc_format <- officedown::rdocx_document(
+    reference_docx   = template,
+    md_extensions    = "-autolink_bare_uris",
+    ...
+  )
+  doc_format$inherits <- "word_document"
+
+  return(doc_format)
 }
 
 
@@ -265,9 +272,5 @@ presentacion_beamer <- function(file_name = "presentacion") {
   report_path <- paste0("informes/presentacion/", file_name, ".Rmd")
   rmarkdown::draft(file = report_path, create_dir = FALSE,
                    template = "beamer", package = "fisabio", edit = FALSE)
-  if (rstudioapi::isAvailable()) {
-    rstudioapi::navigateToFile(report_path)
-  } else {
-    utils::file.edit(report_path)
-  }
+
 }

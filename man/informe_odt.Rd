@@ -4,17 +4,19 @@
 \alias{informe_odt}
 \title{Crea un informe estadístico en ODT -- Markdown}
 \usage{
-informe_odt(file_name = "informe")
+informe_odt(template = "default", template_xml = "default", ...)
 }
 \arguments{
-\item{file_name}{Cadena de caracteres con el nombre del archivo sin
-extensión. Por defecto, los archivos recibirán el nombre genérico
-\code{informe}.}
+\item{template}{Ruta hasta la plantilla del documento. Por defecto se usa la plantilla
+de FISABIO (opción: `default`).}
+
+\item{template_xml}{Ruta hasta la plantilla XML de Pandoc. Por defecto se usa la
+plantilla de FISABIO (opción: `default`).}
+
+\item{...}{Otras opciones a usar en [rmarkdown::odt_document].}
 }
 \value{
-Crea un documento principal y un conjunto de documentos de respaldo
-  (algunos directamente en el directorio de informes/odt y otros en los
-  directorios de data/cache o figuras/odt).
+Crea un documento principal y un conjunto de documentos de respaldo.
 }
 \description{
 Crea automáticamente un informe estadístico en ODT -- Markdown empleando una
@@ -27,9 +29,9 @@ La función solo funciona si el directorio de trabajo se circunscribe
   \code{\link{nuevo_proyecto}}, esto no debería causar molestias, pues se crea
   un \emph{*.Rproj} por defecto.
 
-  La bibliografía se gestiona a través de pandoc-citeproc y un archivo csl
+  La bibliografía se gestiona a través de `pandoc-citeproc` y un archivo `csl`
   con el estilo (por defecto, estilo APA). Si quieres cambiar el estilo las
-  referencias, elimina el archivo csl que se genera por defecto y añade en su
+  referencias, elimina el archivo `csl` que se genera por defecto y añade en su
   lugar el que tu desees, cambiando la opción en el YAML del documento .Rmd.
 
   Con todo, en primer lugar la función comprueba que el proyecto tenga
@@ -39,14 +41,4 @@ La función solo funciona si el directorio de trabajo se circunscribe
   proyecto, la función pregunta qué hacer para que, o bien se cambien las
   opciones del proyecto de forma automática o se detenga la ejecución y se
   cambien a mano.
-}
-\examples{
-\dontrun{
-library(fisabio)
-nuevo_proyecto(proj_nom = "proyecto_europeo_X",
-          proj_dir = "~/proyectos",
-          git      = TRUE)
-
-informe_odt(file_name = "informe_proyecto_x")
-}
 }
