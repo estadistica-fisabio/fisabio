@@ -4,17 +4,15 @@
 \alias{presentacion_beamer}
 \title{Crea una presentación estadística en PDF -- R Markdown -- Beamer}
 \usage{
-presentacion_beamer(file_name = "presentacion")
+presentacion_beamer(...)
 }
 \arguments{
-\item{file_name}{Cadena de caracteres con el nombre del archivo sin
-extensión. Por defecto, los archivos recibirán un nombre genérico
-\code{informe}.}
+\item{...}{Otras opciones a usar en [rmarkdown::beamer_presentation]. No funciona con xelatex...}
 }
 \value{
 Crea un documento principal y un conjunto de documentos de respaldo
-  (algunos directamente en el directorio de presentacion/latex y otros en los
-  directorios de data/cache o figuras/presentacion).
+  (algunos directamente en el directorio de informes y otros en los
+  directorios de cache o figuras).
 }
 \description{
 Crea automáticamente una presentación estadística en PDF -- R Markdown --
@@ -40,7 +38,7 @@ La función solo funciona si el directorio de trabajo se circunscribe
   \code{xltxtra}, \code{xunicode} y el tema \code{motropolis}.
 
   El proceso genera un documento rmarkdown que produce un PDF tras ser
-  compilado con knitr y XeLaTeX. La bibliografía se gestiona a través de
+  compilado con knitr y pdflatex La bibliografía se gestiona a través de
   \code{biblatex} empleando el gestor de referencias \code{biber}, de modo
   que este último debe estar instalado en el sistema.
 
@@ -51,14 +49,4 @@ La función solo funciona si el directorio de trabajo se circunscribe
   proyecto, la función pregunta qué hacer para que, o bien se cambien las
   opciones del proyecto de forma automática o se detenga la ejecución y se
   cambien a mano.
-}
-\examples{
-\dontrun{
-library(fisabio)
-nuevo_proyecto(proj_nom = "proyecto_europeo_X",
-          proj_dir = "~/proyectos",
-          git      = TRUE)
-
-presentacion_beamer(file_name  = "presentacion_proyecto_x")
-}
 }

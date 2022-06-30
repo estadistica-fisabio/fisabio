@@ -217,9 +217,7 @@ informe_docx <- function(template = "default", ...) {
 #' emplea formato R Markdown y tiene extensión .Rmd.
 #'
 #' @export
-#' @param file_name Cadena de caracteres con el nombre del archivo sin
-#'   extensión. Por defecto, los archivos recibirán un nombre genérico
-#'   \code{informe}.
+#' @param ... Otras opciones a usar en [rmarkdown::beamer_presentation]. No funciona con xelatex...
 #'
 #' @details La función solo funciona si el directorio de trabajo se circunscribe
 #'   a un proyecto de RStudio, es decir, si existe un archivo \emph{*.Rproj} en
@@ -239,7 +237,7 @@ informe_docx <- function(template = "default", ...) {
 #'   \code{xltxtra}, \code{xunicode} y el tema \code{motropolis}.
 #'
 #'   El proceso genera un documento rmarkdown que produce un PDF tras ser
-#'   compilado con knitr y XeLaTeX. La bibliografía se gestiona a través de
+#'   compilado con knitr y pdflatex La bibliografía se gestiona a través de
 #'   \code{biblatex} empleando el gestor de referencias \code{biber}, de modo
 #'   que este último debe estar instalado en el sistema.
 #'
@@ -252,25 +250,23 @@ informe_docx <- function(template = "default", ...) {
 #'   cambien a mano.
 #'
 #' @return Crea un documento principal y un conjunto de documentos de respaldo
-#'   (algunos directamente en el directorio de presentacion/latex y otros en los
-#'   directorios de data/cache o figuras/presentacion).
+#'   (algunos directamente en el directorio de informes y otros en los
+#'   directorios de cache o figuras).
 #'
-#' @examples
-#' \dontrun{
-#' library(fisabio)
-#' nuevo_proyecto(proj_nom = "proyecto_europeo_X",
-#'           proj_dir = "~/proyectos",
-#'           git      = TRUE)
-#'
-#' presentacion_beamer(file_name  = "presentacion_proyecto_x")
-#' }
-presentacion_beamer <- function(file_name = "presentacion") {
-  doc_format <- "rmd_beamer"
-  comprueba(file_name = file_name, doc_format = doc_format)
-  if (!dir.exists("informes/presentacion"))
-    dir.create("informes/presentacion", recursive = T)
-  report_path <- paste0("informes/presentacion/", file_name, ".Rmd")
-  rmarkdown::draft(file = report_path, create_dir = FALSE,
-                   template = "beamer", package = "fisabio", edit = FALSE)
+presentacion_beamer <- function(...) {
+  template   <- system.file(
+    "rmarkdown/templates/beamer/resources/template.tex",
+    package = "fisabio"
+  )
+  doc_format <- rmarkdown::beamer_presentation(
+    template         = template,
+    md_extensions    = "-autolink_bare_uris",
+    citation_package = "biblatex",
+    dev              = "tikz",
+    theme            = "metropolis",
+    ...
+  )
+  doc_format$inherits <- "beamer_presentation"
 
+  return(doc_format)
 }
