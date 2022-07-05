@@ -9,14 +9,9 @@ social:
   twitter: carlos_verher
   github: carlosvergara
 titlegraphic: "`r here::here('informes/extra/fisabio_gva.png')`"
+lang: spanish
 bibliography: extra/referencias.bib
 biblio-style: apa
-biblatexoptions:
-  - backend=biber
-  - hyperref=true
-themeoptions:
-  - block=fill
-  - progressbar=frametitle
 fontsize: 8pt
 output: fisabio::presentacion_beamer
 ---

@@ -23,4 +23,8 @@ usa XeLaTeX como motor de LaTeX (mejor trabajo con fuentes).
 \details{
 La función solo debe utilizarse desde una llamada a
   rmarkdown::render() o dentro de un documento .Rmd
+
+Aunque la opción por defecto usa [tinytex::install_tinytex] para obtener una sesión
+de LaTeX operativa, siempre se puede optar por usar una versión del SO, en cuyo caso
+es necesario tenerla instalada.
 }

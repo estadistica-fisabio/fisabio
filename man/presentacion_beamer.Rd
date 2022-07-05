@@ -4,9 +4,13 @@
 \alias{presentacion_beamer}
 \title{Crea una presentación estadística en PDF -- R Markdown -- Beamer}
 \usage{
-presentacion_beamer(...)
+presentacion_beamer(citation_package = c("biblatex", "natbib"), ...)
 }
 \arguments{
+\item{citation_package}{Paquete para gestionar las citas y referencias. Pandoc citeproc
+ha dado problemas con Beamer, de forma que se restringe a natbib y biblatex (opción
+por defecto).}
+
 \item{...}{Otras opciones a usar en [rmarkdown::beamer_presentation]. No funciona con xelatex...}
 }
 \value{
@@ -26,21 +30,13 @@ La función solo funciona si el directorio de trabajo se circunscribe
   \code{\link{nuevo_proyecto}}, esto no debería causar molestias, pues se crea un
   \emph{*.Rproj} por defecto.
 
-  Es necesario tener instalada una distribución LaTeX que incorpore (como
-  mínimo) los siguientes paquetes: \code{adjustbox}, \code{amsmath},
-  \code{amssymb}, \code{array}, \code{authblk}, \code{beamer},
-  \code{biblatex}, \code{booktabs}, \code{caption}, \code{ccicons},
-  \code{csquotes}, \code{float}, \code{fontenc}, \code{fontspec},
-  \code{footmisc}, \code{graphicx}, \code{hyperref}, \code{letltxmacro},
-  \code{longtable}, \code{lscape}, \code{mathtools}, \code{microtype},
-  \code{multirow}, \code{parskip}, \code{polyglossia}, \code{rotating},
-  \code{setspace}, \code{tabularx}, \code{textpos}, \code{tikz},
-  \code{xltxtra}, \code{xunicode} y el tema \code{motropolis}.
+  Aunque la opción por defecto usa [tinytex::install_tinytex] para obtener una sesión
+  de LaTeX operativa, siempre se puede optar por usar una versión del SO, en cuyo caso
+  es necesario tenerla instalada.
 
   El proceso genera un documento rmarkdown que produce un PDF tras ser
   compilado con knitr y pdflatex La bibliografía se gestiona a través de
-  \code{biblatex} empleando el gestor de referencias \code{biber}, de modo
-  que este último debe estar instalado en el sistema.
+  \code{biblatex}.
 
   Con todo, en primer lugar la función comprueba que el proyecto tenga
   declaradas todas estas opciones (vienen por defecto al emplear
