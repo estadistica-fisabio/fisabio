@@ -1,12 +1,12 @@
 Package: fisabio
 Type: Package
-Title: Funciones y plantillas para el Servicio de Estudios Estadísticos de FISABIO
-Version: 0.0.0.9999
+Title: Funciones y Plantillas para el Servicio de Estudios Estadísticos de Fisabio
+Version: 0.0.1
 Authors@R: 
     person(
         given   = "Carlos",
         family  = "Vergara-Hernández",
-        email   = "carlos.vergara@uv.es",
+        email   = "vergara_car@gva.es",
         role    = c("aut", "cre"),
         comment = c(ORCID = "0000-0002-7263-856X")
     )
@@ -18,8 +18,8 @@ Description: Colección de funciones y plantillas de uso común en el Servicio d
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: TRUE
-URL: https://github.com/fisabio/fisabio
-BugReports: https://github.com/fisabio/fisabio/issues
+URL: https://github.com/estadistica-fisabio/fisabio
+BugReports: https://github.com/estadistica-fisabio/fisabio/issues
 Imports:
     git2r (>= 0.30.1),
     knitr (>= 1.39),

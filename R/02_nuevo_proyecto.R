@@ -20,8 +20,14 @@
 #'   directorio indicado no existe, la función tratará de crearlo de forma recursiva.
 #' @param git Valor lógico (TRUE -opción por defecto- o FALSE), indicando si se desea
 #'   generar un repositorio `git` asociado al proyecto.
+#' @param git_nombre Cadena de caracteres indicando el usuario vinculado al repositorio
+#'   `git`. Por defecto se usa el nombre del servicio de estadística.
+#' @param git_correo Cadena de caracteres indicando el correo electrónico vinculado al
+#'   repositorio `git`. Por defecto se indica el correo del servicio de estadística.
 #' @param renv Valor lógico (TRUE -opción por defecto- o FALSE), indicando si se desea
 #'   generar un control de versiones de paquetes con [renv::init()].
+#' @param abrir_proyecto Valor lógico (TRUE -opción por defecto- o FALSE), indicando si se
+#'   desea abrir el nuevo proyecto en una nueva sesión de R-RStudio.
 #' @details La función crea la estructura de directorios a partir del nombre del proyecto
 #'   empleando minúsculas, con independencia de si el usuario ha introducido el argumento
 #'   con mayúsculas.
@@ -40,7 +46,15 @@
 #' library(fisabio)
 #' nuevo_proyecto(nombre_proyecto = "proyecto_europeo_X", directorio = "~/proyectos")
 #' }
-nuevo_proyecto <- function(nombre_proyecto = NULL, directorio = NULL, git = TRUE, renv = TRUE) {
+nuevo_proyecto <- function(
+    nombre_proyecto = NULL,
+    directorio      = NULL,
+    git             = TRUE,
+    git_nombre      = NULL,
+    git_correo      = NULL,
+    renv            = TRUE,
+    abrir_proyecto  = TRUE
+  ) {
 
   ############################################################################
   #                                                                          #
@@ -77,7 +91,10 @@ nuevo_proyecto <- function(nombre_proyecto = NULL, directorio = NULL, git = TRUE
     misel <- grep("_\\d{5}$", tmp)
 
     if (length(misel) > 0) {
-      orden           <- regmatches(tmp[misel], regexpr(paste0(format(Sys.Date(), "%y"), "\\d{3}$"), tmp[misel]))
+      orden           <- regmatches(
+        tmp[misel],
+        regexpr(paste0(format(Sys.Date(), "%y"), "\\d{3}$"), tmp[misel])
+      )
       orden           <- as.numeric(orden)
       orden           <- max(orden) + 1
       orden           <- formatC(orden, digits = 3, flag = "0", format = "d")
@@ -137,11 +154,17 @@ nuevo_proyecto <- function(nombre_proyecto = NULL, directorio = NULL, git = TRUE
   )
   copy_fisabio(
     from_ = "templates/nota_cargo_interno.xlsx",
-    to_   = file.path(ruta_trabajo, paste0("presupuestos/nota_cargo_interno", nombre_proyecto, ".xlsx"))
+    to_   = file.path(
+      ruta_trabajo,
+      paste0("presupuestos/nota_cargo_interno", nombre_proyecto, ".xlsx")
+    )
   )
   copy_fisabio(
     from_ = "templates/presupuesto.xlsx",
-    to_   = file.path(ruta_trabajo, paste0("presupuestos/presupuesto", nombre_proyecto, ".xlsx"))
+    to_   = file.path(
+      ruta_trabajo,
+      paste0("presupuestos/presupuesto", nombre_proyecto, ".xlsx")
+    )
   )
   copy_fisabio(
     from_ = "templates/apa.csl",
@@ -163,7 +186,10 @@ nuevo_proyecto <- function(nombre_proyecto = NULL, directorio = NULL, git = TRUE
     from_ = "templates/fisabio_gva.png",
     to_   = file.path(ruta_trabajo, "informes/extra/fisabio_gva.png")
   )
-  file.create(file.path(ruta_trabajo, "informes/figuras/tikzMetrics"), showWarnings = FALSE)
+  file.create(
+    file.path(ruta_trabajo, "informes/figuras/tikzMetrics"),
+    showWarnings = FALSE
+  )
   knitr::knit(
     input    = file.path(ruta_trabajo, "README.Rmd"),
     output   = file.path(ruta_trabajo, "README.md"),
@@ -179,6 +205,56 @@ nuevo_proyecto <- function(nombre_proyecto = NULL, directorio = NULL, git = TRUE
     writeLines(
       text = paste0("\nsource(\"", sample_scripts[i - 1], "\")\n\n"),
       con  = file.path(ruta_trabajo, sample_scripts[i])
+    )
+  }
+
+
+  ############################################################################
+  #                                                                          #
+  # Configuración de renv                                                    #
+  #                                                                          #
+  ############################################################################
+
+  if (renv == TRUE) {
+    renv::scaffold(project = ruta_trabajo)
+    pkgs <- c(
+      "remotes",
+      "rstudioapi",
+      "data.table",
+      "readxl",
+      "lubridate",
+      "markdown",
+      "rmarkdown",
+      "gtsummary",
+      "flextable",
+      "labelled",
+      "kableExtra",
+      "here",
+      "git2r",
+      "tikzDevice",
+      "tinytex",
+      "estadistica-fisabio/fisabio"
+    )
+
+    dirpkg <- list.dirs(
+      path      = file.path(ruta_trabajo, "renv", "library"),
+      recursive = FALSE
+    )
+    dirpkg <- list.dirs(
+      path      = dirpkg,
+      recursive = FALSE
+    )
+
+    renv::install(
+      packages = pkgs,
+      project  = ruta_trabajo,
+      library  = dirpkg
+    )
+    renv::snapshot(
+      project  = ruta_trabajo,
+      library  = dirpkg,
+      lockfile = file.path(ruta_trabajo, "renv.lock"),
+      prompt   = FALSE
     )
   }
 
@@ -213,10 +289,16 @@ nuevo_proyecto <- function(nombre_proyecto = NULL, directorio = NULL, git = TRUE
         from_ = "templates/gitignore_fisabio",
         to_   = file.path(ruta_trabajo, ".gitignore")
       )
+      if (is.null(git_nombre)) {
+        git_nombre <- "Servicio de Estudios Estad\u00edsticos"
+      }
+      if (is.null(git_correo)) {
+        git_correo <- "estadistica_fisabio@gva.es"
+      }
       git2r::config(
         repo       = repo,
-        user.name  = "Servicio de Estudios Estad\u00edsticos",
-        user.email = "estadistica_fisabio@gva.es"
+        user.name  = git_nombre,
+        user.email = git_correo
       )
       git2r::add(repo = repo, path = "*")
       invisible(
@@ -232,36 +314,6 @@ nuevo_proyecto <- function(nombre_proyecto = NULL, directorio = NULL, git = TRUE
 
   ############################################################################
   #                                                                          #
-  # Configuración de renv                                                    #
-  #                                                                          #
-  ############################################################################
-
-  if (renv == TRUE) {
-    renv::init(project = ruta_trabajo, restart = FALSE, bare = TRUE)
-    pkgs <- c(
-      "remotes",
-      "rstudioapi",
-      "data.table",
-      "readxl",
-      "lubridate",
-      "markdown",
-      "rmarkdown",
-      "gtsummary",
-      "flextable",
-      "labelled",
-      "kableExtra",
-      "here",
-      "git2r",
-      "tikzDevice",
-      "tinytex",
-      "estadistica-fisabio/fisabio"
-    )
-    renv::install(pkgs)
-  }
-
-
-  ############################################################################
-  #                                                                          #
   # Aviso final                                                              #
   #                                                                          #
   ############################################################################
@@ -269,5 +321,10 @@ nuevo_proyecto <- function(nombre_proyecto = NULL, directorio = NULL, git = TRUE
   message("No olvides editar el archivo README para describir el proyecto.")
 
   Sys.sleep(3)
-  rstudioapi::openProject(file.path(ruta_trabajo, paste0(nombre_proyecto, ".Rproj")))
+  if (abrir_proyecto & rstudioapi::isAvailable()) {
+    rstudioapi::openProject(
+      path       = file.path(ruta_trabajo, paste0(nombre_proyecto, ".Rproj")),
+      newSession = TRUE
+    )
+  }
 }

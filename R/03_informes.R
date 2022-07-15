@@ -1,17 +1,4 @@
 
-#' Comprobaciones para informes y presentaciones
-#'
-#' Esta función crea una lista con todas las especificaciones necesarias para
-#' crear un informe o presentación siguiendo el formato de la plantilla de
-#' `fisabio`.
-#'
-#' @param file_name Cadena de caracteres con el nombre del archivo sin
-#'   extensión. Por defecto, los archivos recibirán un nombre genérico
-#'   \code{informe_form}, donde "form" varía en función del formato del informe:
-#'   `pdf`, `odt` y `docx`.
-#' @param doc_format Cadena de caracteres con el formato del documento. Los
-#'   formatos admitidos son `pdf`, `docx`, `odt` y `beamer`
-#'
 comprueba <- function(file_name = NULL, doc_format = NULL) {
   proj_dir    <- getwd()
   proj_files  <- list.files(proj_dir)

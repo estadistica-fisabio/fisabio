@@ -3,6 +3,14 @@
 .RData
 .Ruserdata
 
+# renv
+library/
+local/
+cellar/
+lock/
+python/
+staging/
+
 # Created by https://www.gitignore.io/api/latex,r
 
 ### LaTeX ###

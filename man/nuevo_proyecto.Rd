@@ -8,7 +8,10 @@ nuevo_proyecto(
   nombre_proyecto = NULL,
   directorio = NULL,
   git = TRUE,
-  renv = TRUE
+  git_nombre = NULL,
+  git_correo = NULL,
+  renv = TRUE,
+  abrir_proyecto = TRUE
 )
 }
 \arguments{
@@ -28,8 +31,17 @@ directorio indicado no existe, la función tratará de crearlo de forma recursiv
 \item{git}{Valor lógico (TRUE -opción por defecto- o FALSE), indicando si se desea
 generar un repositorio `git` asociado al proyecto.}
 
+\item{git_nombre}{Cadena de caracteres indicando el usuario vinculado al repositorio
+`git`. Por defecto se usa el nombre del servicio de estadística.}
+
+\item{git_correo}{Cadena de caracteres indicando el correo electrónico vinculado al
+repositorio `git`. Por defecto se indica el correo del servicio de estadística.}
+
 \item{renv}{Valor lógico (TRUE -opción por defecto- o FALSE), indicando si se desea
 generar un control de versiones de paquetes con [renv::init()].}
+
+\item{abrir_proyecto}{Valor lógico (TRUE -opción por defecto- o FALSE), indicando si se
+desea abrir el nuevo proyecto en una nueva sesión de R-RStudio.}
 }
 \value{
 La función crea la siguiente estructura de directorios en directorio/nombre_proyecto/:
