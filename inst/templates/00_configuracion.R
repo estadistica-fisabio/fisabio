@@ -3,6 +3,7 @@ pkgs <- c(
   "remotes",
   "data.table",
   "readxl",
+  "haven",
   "lubridate",
   "rmarkdown",
   "gtsummary",
