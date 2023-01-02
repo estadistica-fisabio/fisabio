@@ -30,6 +30,7 @@ options(
   width                 = 105
 )
 knitr::opts_chunk$set(
+  echo       = FALSE,
   tidy       = FALSE,
   prompt     = FALSE,
   fig.path   = here::here("informes/figuras/fig_"),
@@ -50,6 +51,18 @@ knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
 ###########################################################
 ##              DESDE AQUÍ YA PUEDES BORRAR              ##
 ###########################################################
+```
+
+```{r carga1, include=FALSE, cache=FALSE}
+# source("r/00_configuracion.R")
+# load("datos/procesados/datos.RData")
+# load("datos/procesados/descriptiva.RData")
+# load("datos/procesados/resultados.RData")
+# codigo <- c(
+#   readLines("r/00_configuracion.R"),
+#   readLines("r/01_importar_datos.R")[-2],
+#   readLines("r/02_depurar_datos.R")[-c(1:2)]
+# )
 ```
 
 
@@ -227,6 +240,25 @@ Respecto a su apariencia, se puede obtener una cita entre paréntesis o sin ello
 # Apéndice A
 En principio los apéndices están reservados para el trabajo directo desde \LaTeX, aunque en todo caso es posible añadir una sección final con este propósito (eso sí, teniendo en cuenta que el tratamiento si se desease construir una tabla de contenidos inicial será diferente).
 
+
+\newpage
+
+# Código de análisis
+
+```{r echo = TRUE, eval = FALSE, code = codigo}
+```
+
+
+\newpage
+
+# Datos de sesión
+
+```{r sesion, echo=TRUE, cache = FALSE}
+sessionInfo()
+```
+
+
+\newpage
 
 # Referencias bibliográficas
 \setlength{\parindent}{-1cm}

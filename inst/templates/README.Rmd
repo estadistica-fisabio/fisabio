@@ -3,22 +3,6 @@ title: "Documentación del proyecto"
 output: github_document
 ---
 
-```{r setup, cache = FALSE, include = FALSE}
-options(formatR.arrow = TRUE, width = 90)
-knitr::opts_chunk$set(
-  tidy       = TRUE,
-  prompt     = FALSE,
-  fig.align  = "center",
-  fig.show   = "hold",
-  fig.width  = 10,
-  fig.height = 7,
-  cache      = FALSE,
-  par        = TRUE,
-  comment    = "#",
-  warning    = FALSE,
-  message    = FALSE
-)
-```
 
 ## Descripción de los objetivos del proyecto 
 Insertar una breve descripción del proyecto...

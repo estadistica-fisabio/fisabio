@@ -28,6 +28,7 @@ knitr::knit_hooks$set(chunk = function(x, options) {
   )
 })
 knitr::opts_chunk$set(
+  echo       = FALSE,
   tidy       = FALSE,
   prompt     = FALSE,
   dev        = "tikz",

@@ -93,12 +93,22 @@ nuevo_proyecto <- function(
     if (length(misel) > 0) {
       orden           <- regmatches(
         tmp[misel],
-        regexpr(paste0(format(Sys.Date(), "%y"), "\\d{3}$"), tmp[misel])
+        regexpr("2.\\d{3}$", tmp[misel])
       )
-      orden           <- as.numeric(orden)
-      orden           <- max(orden) + 1
-      orden           <- formatC(orden, digits = 3, flag = "0", format = "d")
-      nombre_proyecto <- paste0("fisabio_se_", orden)
+      curr_year <- format(Sys.Date(), "%y")
+      years     <- regmatches(
+        orden,
+        regexpr(".*(?=\\d{3}$)", orden, perl = TRUE)
+      )
+
+      if (curr_year %in% years) {
+        orden           <- as.numeric(orden)
+        orden           <- max(orden) + 1
+        orden           <- formatC(orden, digits = 3, flag = "0", format = "d")
+        nombre_proyecto <- paste0("fisabio_se_", orden)
+      } else {
+        nombre_proyecto <- paste0("fisabio_se_", format(Sys.Date(), "%y"), "001")
+      }
     } else {
       nombre_proyecto <- paste0("fisabio_se_", format(Sys.Date(), "%y"), "001")
     }
@@ -218,6 +228,8 @@ nuevo_proyecto <- function(
   if (renv == TRUE) {
     renv::scaffold(project = ruta_trabajo)
     pkgs <- c(
+      "rlang",
+      "formatR",
       "remotes",
       "rstudioapi",
       "data.table",
@@ -233,6 +245,7 @@ nuevo_proyecto <- function(
       "git2r",
       "tikzDevice",
       "tinytex",
+      "sodium",
       "estadistica-fisabio/fisabio"
     )
 
