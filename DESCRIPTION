@@ -1,7 +1,7 @@
 Package: fisabio
 Type: Package
 Title: Funciones y Plantillas para el Servicio de Estudios Estadísticos de Fisabio
-Version: 0.0.1
+Version: 0.0.3
 Authors@R: 
     person(
         given   = "Carlos",
@@ -22,15 +22,15 @@ URL: https://github.com/estadistica-fisabio/fisabio
 BugReports: https://github.com/estadistica-fisabio/fisabio/issues
 Imports:
     git2r (>= 0.30.1),
-    knitr (>= 1.39),
-    rmarkdown (>= 2.14),
+    knitr (>= 1.41),
+    rmarkdown (>= 2.19),
     here (>= 1.0.1),
-    renv (>= 0.15.5),
+    renv (>= 0.16.0),
     officedown (>= 0.2.4),
-    rstudioapi (>= 0.13)
+    rstudioapi (>= 0.14)
 Suggest:
-    tikzDevice (>= 0.12.3),
-    gtsummary (>= 1.6.0),
-    flextable (>= 0.7.2)
+    tikzDevice (>= 0.12.3.1),
+    gtsummary (>= 1.6.3),
+    flextable (>= 0.8.3)
 SystemRequirements: git
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.3

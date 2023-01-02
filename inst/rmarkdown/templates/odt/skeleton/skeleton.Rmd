@@ -20,6 +20,7 @@ csl: "`r here::here('informes/extra/apa.csl')`"
 knitr::opts_knit$set(root.dir = here::here())
 options(formatR.arrow = TRUE, width = 70)
 knitr::opts_chunk$set(
+  echo       = FALSE,
   tidy       = FALSE,
   prompt     = FALSE,
   fig.path   = here::here("informes/figuras/fig_"),
@@ -38,6 +39,19 @@ knitr::opts_chunk$set(
 ##              DESDE AQUÍ YA PUEDES BORRAR              ##
 ###########################################################
 ```
+
+```{r carga1, include=FALSE, cache=FALSE}
+# source("r/00_configuracion.R")
+# load("datos/procesados/datos.RData")
+# load("datos/procesados/descriptiva.RData")
+# load("datos/procesados/resultados.RData")
+# codigo <- c(
+#   readLines("r/00_configuracion.R"),
+#   readLines("r/01_importar_datos.R")[-2],
+#   readLines("r/02_depurar_datos.R")[-c(1:2)]
+# )
+```
+
 
 # Sobre esta plantilla
 Esta es la plantilla base para la elaboración de informes estadísticos en FISABIO. Todo en ella es editable, aunque si tienes alguna sugerencia puedes hacérnosla llegar a través de nuestro repositorio en [GitHub](https://www.github.com/estadistica-fisabio/fisabio).
@@ -81,5 +95,24 @@ Respecto a su apariencia, se puede obtener una cita entre paréntesis o contextu
 - ``[-@documento\_a\_citar]``: Fawcett ya lo dijo en su momento [-@Fawcett2006],
 - ``@documento\_a\_citar``: por otro lado, y siempre según [-@Fawcett2006], tal cosa no es así (en absoluto),
 
+
+\newpage
+
+# Código de análisis
+
+```{r echo = TRUE, eval = FALSE, code = codigo}
+```
+
+
+\newpage
+
+# Datos de sesión
+
+```{r sesion, echo=TRUE, cache = FALSE}
+sessionInfo()
+```
+
+
+\newpage
 
 # Referencias bibliográficas
