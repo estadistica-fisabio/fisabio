@@ -1,7 +1,7 @@
 Package: fisabio
 Type: Package
 Title: Funciones y Plantillas para el Servicio de Estudios Estadísticos de Fisabio
-Version: 0.0.3
+Version: 0.0.4
 Authors@R: 
     person(
         given   = "Carlos",
