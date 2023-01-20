@@ -7,6 +7,10 @@
 #' versiones de paquetes de `R` con `renv`.
 #'
 #' @export
+#' @param directorio Cadena de caracteres indicando la ruta al directorio principal donde
+#'   se creará el proyecto. Por defecto se escoge el directorio actual de trabajo,
+#'   devuelto por la función [base::getwd()]. Si este argumento no esta vacío y el
+#'   directorio indicado no existe, la función tratará de crearlo de forma recursiva.
 #' @param nombre_proyecto Cadena de caracteres con el nombre a asignar al proyecto. Por
 #'   defecto se asigna el nombre "fisabio_se_yyXXXX", donde `yy` es el año y XXXX es el
 #'   código correlativo de proyecto para ese año. La función espera que cada proyecto esté
@@ -14,10 +18,6 @@
 #'   argumento se deje en blanco y no se detecte la estructura que este directorio debería
 #'   tener, inicia una nueva cadena de proyecto (p. ej., para el primer proyecto del año
 #'   2022: fisabio_se_220001).
-#' @param directorio Cadena de caracteres indicando la ruta al directorio principal donde
-#'   se creará el proyecto. Por defecto se escoge el directorio actual de trabajo,
-#'   devuelto por la función [base::getwd()]. Si este argumento no esta vacío y el
-#'   directorio indicado no existe, la función tratará de crearlo de forma recursiva.
 #' @param git Valor lógico (TRUE -opción por defecto- o FALSE), indicando si se desea
 #'   generar un repositorio `git` asociado al proyecto.
 #' @param git_nombre Cadena de caracteres indicando el usuario vinculado al repositorio
@@ -44,11 +44,11 @@
 #' @examples
 #' \dontrun{
 #' library(fisabio)
-#' nuevo_proyecto(nombre_proyecto = "proyecto_europeo_X", directorio = "~/proyectos")
+#' nuevo_proyecto(directorio = "~/proyectos", nombre_proyecto = "proyecto_europeo_X")
 #' }
 nuevo_proyecto <- function(
-    nombre_proyecto = NULL,
     directorio      = NULL,
+    nombre_proyecto = NULL,
     git             = TRUE,
     git_nombre      = NULL,
     git_correo      = NULL,

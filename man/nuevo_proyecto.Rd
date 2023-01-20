@@ -5,8 +5,8 @@
 \title{Crea un nuevo proyecto con la estructura `fisabio`}
 \usage{
 nuevo_proyecto(
-  nombre_proyecto = NULL,
   directorio = NULL,
+  nombre_proyecto = NULL,
   git = TRUE,
   git_nombre = NULL,
   git_correo = NULL,
@@ -15,6 +15,11 @@ nuevo_proyecto(
 )
 }
 \arguments{
+\item{directorio}{Cadena de caracteres indicando la ruta al directorio principal donde
+se creará el proyecto. Por defecto se escoge el directorio actual de trabajo,
+devuelto por la función [base::getwd()]. Si este argumento no esta vacío y el
+directorio indicado no existe, la función tratará de crearlo de forma recursiva.}
+
 \item{nombre_proyecto}{Cadena de caracteres con el nombre a asignar al proyecto. Por
 defecto se asigna el nombre "fisabio_se_yyXXXX", donde `yy` es el año y XXXX es el
 código correlativo de proyecto para ese año. La función espera que cada proyecto esté
@@ -22,11 +27,6 @@ ubicado en un directorio raíz destinado a proyectos vigentes y, en caso de que 
 argumento se deje en blanco y no se detecte la estructura que este directorio debería
 tener, inicia una nueva cadena de proyecto (p. ej., para el primer proyecto del año
 2022: fisabio_se_220001).}
-
-\item{directorio}{Cadena de caracteres indicando la ruta al directorio principal donde
-se creará el proyecto. Por defecto se escoge el directorio actual de trabajo,
-devuelto por la función [base::getwd()]. Si este argumento no esta vacío y el
-directorio indicado no existe, la función tratará de crearlo de forma recursiva.}
 
 \item{git}{Valor lógico (TRUE -opción por defecto- o FALSE), indicando si se desea
 generar un repositorio `git` asociado al proyecto.}
@@ -69,6 +69,6 @@ La función crea la estructura de directorios a partir del nombre del proyecto
 \examples{
 \dontrun{
 library(fisabio)
-nuevo_proyecto(nombre_proyecto = "proyecto_europeo_X", directorio = "~/proyectos")
+nuevo_proyecto(directorio = "~/proyectos", nombre_proyecto = "proyecto_europeo_X")
 }
 }
