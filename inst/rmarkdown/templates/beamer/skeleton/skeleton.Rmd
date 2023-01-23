@@ -3,7 +3,7 @@ title: Presentación de contenido estadístico
 subtitle: Un subtítulo
 author: Carlos Vergara Hernández
 date: "`r format(Sys.Date(), '%d de %B de %Y')`"
-institute: Servicio de estudios estadísticos, FISABIO
+institute: Servicio de estudios estadísticos, Fisabio
 social:
   correo: vergara_car@gva.es
   twitter: carlos_verher

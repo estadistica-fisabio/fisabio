@@ -2,7 +2,7 @@
 title: Plantilla de Informe Estadístico
 author:
   - name: "Carlos Vergara Hernández"
-    corresmail: "estadistica_fisabio@gva.es"
+    corresmail: "estadistica@fisabio.es"
     affilnumber: 1
 affil:
   - name: "Servicio de estudios estadísticos, FISABIO"

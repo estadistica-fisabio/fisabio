@@ -6,7 +6,7 @@ middle-author:
 last-author: "Paco Jerte-Dell'Ombro"
 affiliation:
   - name: "Servicio de estudios estadísticos, FISABIO"
-email: "estadistica_fisabio@gva.es"
+email: "estadistica@fisabio.es"
 date: "Versión 0.0.1 (`r Sys.Date()`)"
 output: fisabio::informe_odt
 bibliography: "`r here::here('informes/extra/referencias.bib')`"

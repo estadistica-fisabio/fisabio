@@ -6,7 +6,7 @@ csl: "`r here::here('informes/extra/apa.csl')`"
 params: 
   autores: "Carlos Vergara Hernández"
   instituciones: "Servicio de estudios estadísticos, FISABIO"
-  email: "estadistica_fisabio@gva.es"
+  email: "estadistica@fisabio.es"
   version: "0.0.1"
 ---
 
