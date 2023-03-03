@@ -228,24 +228,6 @@ nuevo_proyecto <- function(
   if (renv == TRUE) {
     renv::scaffold(project = ruta_trabajo)
     pkgs <- c(
-      "rlang",
-      "formatR",
-      "remotes",
-      "rstudioapi",
-      "data.table",
-      "readxl",
-      "lubridate",
-      "markdown",
-      "rmarkdown",
-      "gtsummary",
-      "flextable",
-      "labelled",
-      "kableExtra",
-      "here",
-      "git2r",
-      "tikzDevice",
-      "tinytex",
-      "sodium",
       "estadistica-fisabio/fisabio"
     )
 
@@ -259,9 +241,10 @@ nuevo_proyecto <- function(
     )
 
     renv::install(
-      packages = pkgs,
-      project  = ruta_trabajo,
-      library  = dirpkg
+      packages     = pkgs,
+      project      = ruta_trabajo,
+      library      = dirpkg,
+      dependencies = c("Depends", "Imports")
     )
     renv::snapshot(
       project  = ruta_trabajo,

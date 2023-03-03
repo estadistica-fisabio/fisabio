@@ -15,11 +15,11 @@ pkgs <- c(
 invisible(
   sapply(
     pkgs,
-      function(x) {
-        if (!x %in% installed.packages()[, 1])
-          install.packages(x)
-          suppressPackageStartupMessages(require(x, character.only = TRUE))
-      }
+    function(x) {
+      if (!x %in% installed.packages()[, 1])
+        install.packages(x)
+      suppressPackageStartupMessages(require(x, character.only = TRUE))
+    }
   )
 )
 
