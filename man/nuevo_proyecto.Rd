@@ -10,7 +10,7 @@ nuevo_proyecto(
   git = TRUE,
   git_nombre = NULL,
   git_correo = NULL,
-  renv = TRUE,
+  renv = FALSE,
   abrir_proyecto = TRUE
 )
 }
@@ -37,8 +37,10 @@ generar un repositorio `git` asociado al proyecto.}
 \item{git_correo}{Cadena de caracteres indicando el correo electrónico vinculado al
 repositorio `git`. Por defecto se indica el correo del servicio de estadística.}
 
-\item{renv}{Valor lógico (TRUE -opción por defecto- o FALSE), indicando si se desea
-generar un control de versiones de paquetes con [renv::init()].}
+\item{renv}{Valor lógico (TRUE o FALSE -opción por defecto- ), indicando si
+se desea generar un control de versiones de paquetes con [renv::init()]. En
+todo caso, es recomendable activarlo al finalizar el proyecto para archivar
+con las versiones correctas de los paquetes empleados.}
 
 \item{abrir_proyecto}{Valor lógico (TRUE -opción por defecto- o FALSE), indicando si se
 desea abrir el nuevo proyecto en una nueva sesión de R-RStudio.}

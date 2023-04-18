@@ -27,3 +27,7 @@ rm(pkgs)
 
 remotes::install_github("estadistica-fisabio/fisabio")
 library(fisabio)
+
+
+# No olvides iniciar renv al finalizar el proyecto para gestionar mejor las versiones
+# renv::init()

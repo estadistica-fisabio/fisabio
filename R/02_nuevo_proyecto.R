@@ -24,8 +24,10 @@
 #'   `git`. Por defecto se usa el nombre del servicio de estadística.
 #' @param git_correo Cadena de caracteres indicando el correo electrónico vinculado al
 #'   repositorio `git`. Por defecto se indica el correo del servicio de estadística.
-#' @param renv Valor lógico (TRUE -opción por defecto- o FALSE), indicando si se desea
-#'   generar un control de versiones de paquetes con [renv::init()].
+#' @param renv Valor lógico (TRUE o FALSE -opción por defecto- ), indicando si
+#'   se desea generar un control de versiones de paquetes con [renv::init()]. En
+#'   todo caso, es recomendable activarlo al finalizar el proyecto para archivar
+#'   con las versiones correctas de los paquetes empleados.
 #' @param abrir_proyecto Valor lógico (TRUE -opción por defecto- o FALSE), indicando si se
 #'   desea abrir el nuevo proyecto en una nueva sesión de R-RStudio.
 #' @details La función crea la estructura de directorios a partir del nombre del proyecto
@@ -52,7 +54,7 @@ nuevo_proyecto <- function(
     git             = TRUE,
     git_nombre      = NULL,
     git_correo      = NULL,
-    renv            = TRUE,
+    renv            = FALSE,
     abrir_proyecto  = TRUE
   ) {
 
@@ -225,7 +227,7 @@ nuevo_proyecto <- function(
   #                                                                          #
   ############################################################################
 
-  if (renv == TRUE) {
+  if (isTRUE(renv)) {
     renv::scaffold(project = ruta_trabajo)
     pkgs <- c(
       "estadistica-fisabio/fisabio"
@@ -252,7 +254,7 @@ nuevo_proyecto <- function(
       lockfile = file.path(ruta_trabajo, "renv.lock"),
       prompt   = FALSE
     )
-  }
+  } else message("Proyecto configurado sin renv: no olvide iniciarlo al archivar el proyecto.")
 
 
   ############################################################################
