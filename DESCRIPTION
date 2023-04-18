@@ -21,16 +21,16 @@ LazyData: TRUE
 URL: https://github.com/estadistica-fisabio/fisabio
 BugReports: https://github.com/estadistica-fisabio/fisabio/issues
 Imports:
-    git2r (>= 0.30.1),
-    knitr (>= 1.41),
-    rmarkdown (>= 2.19),
+    git2r (>= 0.31.0),
+    knitr (>= 1.42),
+    rmarkdown (>= 2.20),
     here (>= 1.0.1),
-    renv (>= 0.16.0),
-    officedown (>= 0.2.4),
+    renv (>= 0.17.0),
+    officedown (>= 0.3.0),
     rstudioapi (>= 0.14)
 Suggest:
-    tikzDevice (>= 0.12.3.1),
-    gtsummary (>= 1.6.3),
-    flextable (>= 0.8.3)
+    tikzDevice (>= 0.12.4),
+    gtsummary (>= 1.7),
+    flextable (>= 0.8.6)
 SystemRequirements: git
 RoxygenNote: 7.2.3
