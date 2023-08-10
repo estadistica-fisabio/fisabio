@@ -5,7 +5,7 @@ middle-author:
   - name: "Aitor Tilla-Fresca"
 last-author: "Paco Jerte-Dell'Ombro"
 affiliation:
-  - name: "Servicio de estudios estadísticos, FISABIO"
+  - name: "Servicio de estudios estadísticos, Fisabio"
 email: "estadistica@fisabio.es"
 date: "Versión 0.0.1 (`r Sys.Date()`)"
 output: fisabio::informe_odt

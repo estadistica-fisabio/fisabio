@@ -5,7 +5,7 @@ bibliography: "`r here::here('informes/extra/referencias.bib')`"
 csl: "`r here::here('informes/extra/apa.csl')`"
 params: 
   autores: "Carlos Vergara Hernández"
-  instituciones: "Servicio de estudios estadísticos, FISABIO"
+  instituciones: "Servicio de estudios estadísticos, Fisabio"
   email: "estadistica@fisabio.es"
   version: "0.0.1"
 ---
