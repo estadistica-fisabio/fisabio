@@ -121,6 +121,18 @@ plot(1:10, 1:10)
 knitr::kable(mtcars[1:6, 1:7], digits = 2, align = rep("c", 7), caption = "Esto es una Tabla...")
 ```
 
+También es posible pasar a una hoja apaisada con gracias a las funciones `fisabio::word_start_land` y `fisabio::word_stop_land`, aunque esta última debe ir en un `chunk` de código de R independiente:
+
+```{r ejemplo, fig.cap="Una gráfica", results="hide", fig.height=4, fig.width=5}
+fisabio::word_start_land()
+plot(1:10, 1:10)
+```
+
+```{r}
+fisabio::word_stop_land()
+```
+
+
 ## Añadir imágenes
 Para cargar imágenes que no procedan del código incrustado en el propio documento lo mejor es utilizar la función `knitr::include_graphics("ruta/a/la/imagen")` en un _chunk_ de código estándar `knitr::include_graphics("fisabio.png")`, cuyo resultado es:
 
