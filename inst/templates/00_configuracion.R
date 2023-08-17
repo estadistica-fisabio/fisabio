@@ -29,5 +29,13 @@ remotes::install_github("estadistica-fisabio/fisabio")
 library(fisabio)
 
 
+# Opciones ----------------------------------------------------------------
+colores <- c("#E69F00", "#0072B2", "#009E73", "#D55E00", "#CC79A7")
+
+
+
+# Funciones ---------------------------------------------------------------
+
+
 # No olvides iniciar renv al finalizar el proyecto para gestionar mejor las versiones
 # renv::init()
