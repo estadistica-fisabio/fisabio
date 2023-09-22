@@ -4,14 +4,22 @@ Title: Funciones y Plantillas para el Servicio de Estudios Estadísticos de Fisa
 Version: 0.1.0
 Date: 2023-08-17
 Authors@R: 
-    person(
+    c(
+        person(
         given   = "Carlos",
         family  = "Vergara-Hernández",
-        email   = "vergara_car@gva.es",
+        email   = "carlos.vergara@fisabio.es",
         role    = c("aut", "cre"),
         comment = c(ORCID = "0000-0002-7263-856X")
+        ),
+        person(
+        given   = "Ana",
+        family  = "Escrig-Pérez",
+        email   = "ana.escrig@fisabio.es",
+        role    = c("aut")
+        )
     )
-Maintainer: Carlos Vergara Hernández <vergara_car@gva.es>
+Maintainer: Carlos Vergara Hernández <carlos.vergara@fisabio.es>
 Description: Colección de funciones y plantillas de uso común en el Servicio de Estudios 
     Estadísticos de FISABIO. Incluye la función 'nuevo_proyecto()' para crear una estructura
     unificada de directorios, archivos y funciones comunes, así como las funciones 
