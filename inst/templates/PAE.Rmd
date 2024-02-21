@@ -1,0 +1,254 @@
+---
+title: "Plan de Análisis Estadístico"
+subtitle: "TÍTULO DEL PROYECTO"
+output: fisabio::informe_docx
+bibliography: "`r here::here('informes/extra/referencias.bib')`"
+csl: "`r here::here('informes/extra/apa.csl')`"
+params: 
+  #autores: 
+  instituciones: "Servicio de Estudios Estadísticos, FISABIO"
+  email: "estadistica@fisabio.es"
+  version: "0.0.1"
+---
+
+```{r setup, cache=FALSE, include=FALSE}
+###########################################################
+##                 NO BORRAR ESTA SECCIÓN                ##
+###########################################################
+knitr::opts_knit$set(root.dir = here::here())
+options(
+  formatR.arrow         = TRUE,
+  width                 = 80
+)
+knitr::opts_chunk$set(
+  echo       = FALSE,
+  tidy       = FALSE,
+  prompt     = FALSE,
+  fig.path   = here::here("informes/figuras/fig_"),
+  fig.show   = "hold",
+  dev        = "png",
+  dpi        = 600,
+  fig.width  = 6,
+  fig.height = 3,
+  cache      = FALSE,
+  par        = TRUE,
+  comment    = "#",
+  warning    = FALSE,
+  message    = FALSE,
+  tab.cap.pre = "Tabla",
+  tab.cap.sep = ". ",
+  ft.keepnext = FALSE,
+  ft.split    = TRUE
+)
+linea_baja <- officer::fp_par(
+  text.align     = "center", 
+  padding.bottom = 20, padding.top = 120, 
+  border.bottom  = officer::fp_border()
+)
+fp_params  <- officer::fp_par(
+  text.align     = "center",
+  padding.bottom = 12,
+  padding.top    = 6
+)
+toc        <- officer::fp_text(
+  bold        = TRUE,
+  font.size   = 14,
+  font.family = "Roboto"
+)
+ft         <- officer::fp_text(
+  font.size   = 10,
+  font.family = "Roboto Light"
+)
+```
+
+```{r portada_plus, echo = FALSE}
+###########################################################
+## NO BORRAR ESTA SECCIÓN SI SE QUIERE PORTADA           ##
+###########################################################
+officer::fpar(officer::ftext(paste0(params$autores), ft), fp_p = fp_params)
+officer::fpar(officer::ftext(paste0('Versión ', params$version, ' (', Sys.Date(), ')'), ft), fp_p = fp_params)
+officer::fpar(officer::ftext(paste0(params$instituciones), ft), fp_p = fp_params)
+officer::fpar(officer::ftext(paste0(params$email), ft), fp_p = fp_params)
+```
+
+\newpage
+
+`r officer::ftext("Índice de contenidos", toc)`
+`r linea_baja`
+<!---BLOCK_TOC--->
+
+\newpage
+
+El presente documento es el **Plan de Análisis Estadístico** (PAE) elaborado por el Servicio de Estudios Estadísticos de la Fundación [FISABIO](http://fisabio.san.gva.es/estudios-estadisticos), basado en la información del proyecto facilitada por **PERSONA O ENTIDAD QUE SOLICITA EL SERVICIO DE ESTADÍSTICA**.
+
+<br>
+
+# Información del Proyecto
+
+## Título
+
+**Título del proyecto**
+
+<br>
+
+## Objetivos
+
+### Objetivo principal
+
+<br>
+
+### Objetivos secundarios
+
+
+\newpage
+
+# Datos
+
+La base de datos contendrá la información necesaria para llevar a cabo los análisis estadísticos requeridos para cada uno de los objetivos del estudio y tendrá un formato adecuado para el análisis estadístico (extensión _.csv_, _.xlsx_, _.sav_ o cualquiera recomendado por el Servicio de Estudios Estadísticos).
+
+En ningún caso la base de datos contendrá información sensible, es decir, no estarán incluidas las variables referentes al número de DNI, teléfono, SIP, NHC...
+
+Si la base de datos contiene información que no debe ser incluida en el análisis estadístico, se deberá reflejar por escrito cuando se haga entrega de la base de datos al Servicio de Estudios Estadísticos. 
+
+<br>
+
+## Codebook
+
+Acompañando a la base de datos, se añadirá un archivo/documento con las características de cada una de las variables para validar la base de datos y para que en el informe los resultados obtenidos aparezcan de forma adecuada. Este archivo, conocido por _codebook_ o libro de códigos, debe recoger la siguiente información:
+
+- **Nombre de variable**: nombre corto, sin espacios (se puede usar "_" si hiciese falta), sin caracteres especiales (no deben contener: $, %...).
+
+- **Enunciado**: explicación de la información que contiene cada una de las variables y que aparecerán en tablas y gráficos. Por ejemplo, en la variable _edad_ posibles enunciados serían "Edad en años", "Edad (años)", "Edad en años en la visita basal"...
+
+- **Tipo de variable**: hace referencia al tipo de variable (fecha, texto abierto, categórica, ordinal, numérica).
+
+- **Etiquetas**: en el caso de las variables categóricas codificadas mediante valores numéricos, se establece la categoría a la que corresponde cada valor numérico. Por ejemplo, en la variable _sexo_ codificada (no texto abierto) el valor 1 corresponde a "Hombre" y el 2 a "Mujer". Si las variables categóricas no están codificadas mediante números, es decir, están en formato texto, esta información no es necesaria.
+  
+- **Rango de posibles valores**: en el caso de las variables numéricas se detalla el rango de posibles valores que pueden tomar. Por ejemplo, la edad en años toma valores desde 70 hasta 100.
+
+A continuación se muestra una captura de pantalla de un ejemplo en formato Excel:
+
+```{r , fig.cap = "Ejemplo de _codebook_."}
+knitr::include_graphics(path = here::here("PAE/codebook_ejemplo.png"), rel_path = FALSE)
+```
+
+\newpage
+
+# Gestión de datos
+
+La base de datos original y cualquier material sensible relacionado con el proyecto, será enviado por correo electrónico al Servicio de Estudios Estadísticos de FISABIO y será éste el responsable de almacenar de forma segura los archivos recibidos. El acceso a dichos documentos será restringido al bioestadístico asignado al proyecto y al responsable del Servicio de Estudios Estadísticos.
+
+Cualquier base de datos fruto del procesamiento estadístico de los datos originales, será creada y almacenada exclusivamente con la finalidad de cubrir con los objetivos del proyecto y tendrá las mismas restricciones de acceso que los archivos originales.
+
+\newpage
+
+# Procesamiento de datos
+
+El procesamiento de datos, las técnicas y los análisis estadísticos que se describen en este documento se realizarán únicamente sobre la selección de variables y pacientes indicados al Servicio de Estudios Estadísticos y se llevarán a cabo en el entorno estadístico R [@rbase]. 
+
+En el procesamiento de los datos se realizará la limpieza y la validación de las variables, basándose en la información aportada dentro del _codebook_ y las relaciones entre ellas, lo cual implica: 
+
+- adecuar cada tipo de variable, 
+
+- etiquetar correctamente tanto las variables como sus categorías, 
+
+- confirmar que los valores numéricos lo son y que están dentro de los rangos preestablecidos, y
+
+- estudiar la coherencia de las relaciones entre variables. 
+
+Cualquier incidencia detectada será informada a la investigadora responsable del proyecto y será ella la que deberá determinar el procedimiento a seguir.
+
+<br>
+
+## Variables derivadas
+
+Se entienden por variables derivadas, las nuevas variables necesarias que crea el bioestadístico en la base de datos a través de la información de las variables originales. Suelen ser creadas mediante los siguientes procesos:
+
+- Agrupación de categorías.
+
+- Categorización de variables numéricas en rangos de valores.
+
+- Cálculo de tiempo que transcurre entre dos fechas.
+
+- Cálculos algebraicos entre variables numéricas.
+
+- Clasificación según condicionales entre variables.
+
+<br>
+
+Para proceder con el análisis estadístico se calcularán las variables derivadas necesarias para aplicar la metodología seleccionada. A priori, las variables derivadas serán:
+
+- **Variable derivada 1**: descripción 1.
+
+- **Variable derivada 2**: descripción 2.
+
+- ...
+
+\newpage
+
+# Análisis estadístico
+
+## Análisis estadístico descriptivo
+
+En primer lugar, se realizará un análisis descriptivo univariante de las variables seleccionadas para el estudio según el tipo:
+
+- **Cuantitativas**: media y desviación típica, mediana y rango intercuartílico y mínimo y máximo.
+
+- **Cualitativas**: la frecuencia absoluta y el porcentaje para cada categoría.
+
+<br>
+
+## Análisis estadístico por objetivos
+
+A continuación se presenta la propuesta inicial del análisis estadístico para cada uno de los objetivos comunicados, sin conocer la base de datos, por lo que, cabe la posibilidad de hacer modificaciones al recibir los datos para adecuar los análisis a las características concretas de cada una de las variables y pacientes seleccionados.
+
+<br>
+
+### Objetivo principal
+
+Para cubrir el objetivo principal **SE REALIZARÁ EL ANÁLISIS BIVARIADO DESCRIPTIVO E INFERENCIAL DE TODAS LAS VARIABLES SEGÚN LAS VARIABLES A, B...** En este caso, las medidas descriptivas y las pruebas inferenciales se realizarán según el tipo de variable, en concreto:
+
+**Variables cuantitativas**: 
+
+- Medidas descriptivas: media y desviación típica, mediana y rango intercuartílico, y mínimo y máximo.
+
+- Pruebas inferenciales: contraste de hipótesis mediante prueba de Wilcoxon-Mann-Whitney.
+
+**Variables cualitativas**: 
+
+- Medidas descriptivas: frecuencia y porcentajes.
+
+- Pruebas inferenciales: contraste de hipótesis mediante prueba $\chi ^{2}$, empleando simulación del p-valor con 2000 réplicas.
+
+<br>
+
+### Objetivo secundario 1
+
+Para cubrir el objetivo secundario 1 **SE ESTIMARÁN UNA REGRESIÓN LOGÍSTICA PARA LA VARIABLE DEPENDIENTE CON LAS SIGUIENTES VARIABLES PREDICTORAS AÑADIENDO COMO FACTORES DE CONFUSIÓN: CONFUSORA1, CONFUSORA2,... POSTERIORMENTE, SE ESTIMARÁ EL PUNTO DE CORTE DE LA VARIABLE X1 QUE OPTIMIZA LA RELACIÓN ENTRE SENSIBILIDAD Y ESPECIFICIDAD PARA LA PREDICCIÓN DE LA VARIABLE DEPENDIENTE, Y LA MATRIZ DE CONFUSIÓN.**. La metodología aplicada para estimar el modelo y el punto de corte óptimo será evaluada por el bioestadístico según las características de los datos del estudio.
+
+<br>
+
+### Objetivo secundario 2
+
+Para cubrir el objetivo secundario 2, **VALORANDO EL TAMAÑO MUESTRAL COMUNICADO POR LA INVESTIGADORA, SE REALIZARÁ UN ANÁLISIS DESCRIPTIVO BIVARIADO SEGÚN LA VARIABLE 1 Y UN ANÁLISIS DESCRIPTIVO BIVARIADO SEGMENTANDO A LOS PACIENTES POR LAS CATEGORÍAS DE LA VARIABLE 2.**
+
+\newpage
+
+# Informe de resultados
+
+El Servicio de Estudios Estadísticos realizará un informe final de resultados que incluirá, además de la  introducción de la descripción de los datos recibidos y los objetivos del proyecto: 
+
+- Descripción de la gestión, validación y tratamiento de los datos, incluyendo las incidencias encontradas y acciones realizadas para solventarlas.
+
+- Detalles de la metodología aplicada.
+
+- Resultados tabulados de la metodología descrita y gráficos de los principales hallazgos.
+
+- Código realizado durante el proyecto y los datos de la sesión para su reproducibilidad y revisión.
+
+- Referencias bibliográficas.
+
+\newpage
+
+# Referencias bibliográficas
+
