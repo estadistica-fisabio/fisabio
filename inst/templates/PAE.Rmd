@@ -129,7 +129,7 @@ Acompañando a la base de datos, se añadirá un archivo/documento con las carac
 A continuación se muestra una captura de pantalla de un ejemplo en formato Excel:
 
 ```{r , fig.cap = "Ejemplo de _codebook_."}
-knitr::include_graphics(path = here::here("PAE_plantilla/codebook_ejemplo.png"), rel_path = FALSE)
+knitr::include_graphics(path = here::here("PAE/codebook_ejemplo.png"), rel_path = FALSE)
 ```
 
 \newpage
