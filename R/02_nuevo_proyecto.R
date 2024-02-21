@@ -38,6 +38,8 @@
 #'   en el directorio informes.
 #' @return La función crea la siguiente estructura de directorios en directorio/nombre_proyecto/:
 #'   * r
+#'   * presupuestos
+#'   * pae
 #'   * informes
 #'   * datos
 #'       - brutos
@@ -141,7 +143,7 @@ nuevo_proyecto <- function(
   sub_dirs <- file.path(
     ruta_trabajo,
     c(paste0("datos/", c("brutos", "procesados", "documentacion")),
-      paste0("informes/", c("extra", "figuras")), "r", "presupuestos")
+      paste0("informes/", c("extra", "figuras")), "r", "presupuestos", "pae")
   )
   invisible(sapply(sub_dirs, dir.create, recursive = TRUE, mode = "0777"))
 
@@ -201,6 +203,14 @@ nuevo_proyecto <- function(
   file.create(
     file.path(ruta_trabajo, "informes/figuras/tikzMetrics"),
     showWarnings = FALSE
+  )
+  copy_fisabio(
+    from_ = "templates/codebook_ejemplo.png",
+    to_   = file.path(ruta_trabajo, "pae/codebook_ejemplo.png")
+  )
+  copy_fisabio(
+    from_ = "templates/PAE.Rmd",
+    to_   = file.path(ruta_trabajo, "pae", "PAE.Rmd")
   )
   knitr::knit(
     input    = file.path(ruta_trabajo, "README.Rmd"),
@@ -291,7 +301,7 @@ nuevo_proyecto <- function(
         git_nombre <- "Servicio de Estudios Estad\u00edsticos"
       }
       if (is.null(git_correo)) {
-        git_correo <- "estadistica_fisabio@gva.es"
+        git_correo <- "estadistica@fisabio.es"
       }
       git2r::config(
         repo       = repo,
