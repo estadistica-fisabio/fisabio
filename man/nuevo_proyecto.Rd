@@ -48,6 +48,8 @@ desea abrir el nuevo proyecto en una nueva sesión de R-RStudio.}
 \value{
 La función crea la siguiente estructura de directorios en directorio/nombre_proyecto/:
   * r
+  * presupuestos
+  * pae
   * informes
   * datos
       - brutos

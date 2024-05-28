@@ -38,4 +38,4 @@ Acerca de `fisabio`
 
 `fisabio` es el nombre que nos hemos dado como grupo de usuarios de R dentro de la Fundación para el Fomento de la Investigación Sanitaria y Biomédica de la Comunidad Valenciana (FISABIO).
 
-Si al igual que a nosotros te encanta la estadística en R, o si tuvieras alguna duda acerca del grupo o su actividad, puedes contactarnos sin problema a través del correo <estadistica_fisabio@gva.es>.
+Si al igual que a nosotros te encanta la estadística en R, o si tuvieras alguna duda acerca del grupo o su actividad, puedes contactarnos sin problema a través del correo <estadistica@fisabio.es>.
