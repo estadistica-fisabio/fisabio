@@ -325,41 +325,41 @@ $endif$
 \def\begincol{\begin{column}}
 \def\endcol{\end{column}}
 \def\endcols{\end{columns}}
-
+\newcommand{\theHtable}{\thetable}
 
 \begin{document}
-	
+
 	% Hide progress bar and footline on titlepage
 	$if(title)$
 	\begin{frame}[plain]
 		\titlepage
 	\end{frame}
 	$endif$
-	
+
 	$for(include-before)$
 	$include-before$
 	$endfor$
-	
+
 	$if(toc)$
 	\begin{frame}
 		\tableofcontents[hideallsubsections]
 	\end{frame}
 	$endif$
-	
+
 	$body$
-	
-	
+
+
 	\begin{frame}[plain,noframenumbering]
 		\section{Gracias por su atención}
 		\centering
-		
+
 		$if(social)$
 		$if(social.correo)$\faEnvelopeO \texttt{$social.correo$}$endif$	$if(social.twitter)$\hspace{.3cm} \faTwitter \texttt{\href{https://twitter.com/$social.twitter$}{@$social.twitter$}}$endif$ $if(social.twitter)$\hspace{.3cm} \faGithub \texttt{\href{https://github.com/$social.github$}{@$social.github$}}$endif$
-		
+
 		$endif$
 	\end{frame}
-	
-	
+
+
 	$if(bibliography)$
 	$if(natbib)$
 	$if(bibliography)$
@@ -376,7 +376,7 @@ $endif$
 	\end{frame}
 	$endif$
 	$endif$
-	
+
 	$if(biblatex)$
 	\begin{frame}[allowframebreaks]{$biblio-title$}
 		\bibliographytrue
@@ -387,5 +387,5 @@ $endif$
 	$for(include-after)$
 	$include-after$
 	$endfor$
-	
+
 \end{document}
