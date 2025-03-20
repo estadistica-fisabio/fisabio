@@ -5,9 +5,8 @@ author: Carlos Vergara Hernández
 date: "`r format(Sys.Date(), '%d de %B de %Y')`"
 institute: Servicio de estudios estadísticos, Fisabio
 social:
-  correo: vergara_car@gva.es
-  twitter: carlos_verher
-  github: carlosvergara
+  correo: estadistica@fisabio.es
+  github: estadistica-fisabio
 titlegraphic: "`r here::here('informes/extra/fisabio_gva.png')`"
 lang: spanish
 bibliography: extra/referencias.bib
