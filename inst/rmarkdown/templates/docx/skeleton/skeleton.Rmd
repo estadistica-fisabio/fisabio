@@ -56,14 +56,20 @@ ft         <- officer::fp_text(
 )
 ```
 
-```{r portada_plus, echo = FALSE}
+```{r portada_plus, echo = FALSE, results='asis'}
 ###########################################################
 ## NO BORRAR ESTA SECCIÓN SI SE QUIERE PORTADA           ##
 ###########################################################
-officer::fpar(officer::ftext(paste0(params$autores), ft), fp_p = fp_params)
-officer::fpar(officer::ftext(paste0('Versión ', params$version, ' (', Sys.Date(), ')'), ft), fp_p = fp_params)
-officer::fpar(officer::ftext(paste0(params$instituciones), ft), fp_p = fp_params)
-officer::fpar(officer::ftext(paste0(params$email), ft), fp_p = fp_params)
+mk_line <- function(x) officer::fpar(officer::ftext(x, ft), fp_p = fp_params)
+
+bl <- officer::block_list(
+  mk_line(params$autores),
+  mk_line(sprintf("Versión %s (%s)", params$version, Sys.Date())),
+  mk_line(params$instituciones),
+  mk_line(params$email)
+)
+
+officedown::knit_print_block(bl)
 ```
 
 \newpage
