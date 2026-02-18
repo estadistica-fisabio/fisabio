@@ -32,7 +32,7 @@ word_start_land <- function() {
   officer::block_section(
     officer::prop_section(
       type = "continuous",
-      page_margins = officer::page_mar(footer = 0.6, header = 0.1, right = 0.75, left = 0.27),
+      page_margins = officer::page_mar(footer = 0.6, header = 0.1, right = 0.75, left = 0.75),
       header_default = officer::block_list(
         " ",
         officer::fpar(

@@ -3,6 +3,10 @@
 .RData
 .Ruserdata
 
+# todos los datos, brutos o procesados
+datos/brutos/
+datos/procesados/
+
 # renv
 library/
 local/
