@@ -166,13 +166,14 @@ nuevo_proyecto <- function(
     from_ = "templates/README.Rmd",
     to_   = file.path(ruta_trabajo, "README.Rmd")
   )
-  copy_fisabio(
-    from_ = "templates/nota_cargo_interno.xlsx",
-    to_   = file.path(
-      ruta_trabajo,
-      paste0("presupuestos/nota_cargo_interno", nombre_proyecto, ".xlsx")
-    )
-  )
+  # Borro nota de cargo: ya no se tramitan
+  # copy_fisabio(
+  #   from_ = "templates/nota_cargo_interno.xlsx",
+  #   to_   = file.path(
+  #     ruta_trabajo,
+  #     paste0("presupuestos/nota_cargo_interno", nombre_proyecto, ".xlsx")
+  #   )
+  # )
   copy_fisabio(
     from_ = "templates/presupuesto.xlsx",
     to_   = file.path(
