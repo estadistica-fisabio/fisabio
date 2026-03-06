@@ -34,20 +34,19 @@ comprueba <- function(file_name = NULL, doc_format = NULL) {
 #' usa XeLaTeX como motor de LaTeX (mejor trabajo con fuentes).
 #'
 #' @param motor Motor de LaTeX. XeLaTeX por defecto.
-#' @param ... Otros argumentos a pasar a [rmarkdown::pdf_document].
+#' @param ... Otros argumentos a pasar a [rmarkdown::pdf_document()].
 #' @export
 #'
 #' @details La función solo debe utilizarse desde una llamada a
-#'   rmarkdown::render() o dentro de un documento .Rmd
+#'   [rmarkdown::render()] o dentro de un documento .Rmd
 #'
-#' Aunque la opción por defecto usa [tinytex::install_tinytex] para obtener una sesión
+#' Aunque la opción por defecto usa [tinytex::install_tinytex()] para obtener una sesión
 #' de LaTeX operativa, siempre se puede optar por usar una versión del SO, en cuyo caso
 #' es necesario tenerla instalada.
 #'
-#' @return Objeto con clase "rmarkdown_output_format".
+#' @return Objeto con clase `rmarkdown_output_format`.
 #'
 informe_pdf <- function(motor = c("xelatex", "pdftex"), ...) {
-  este_sitio <- here::here()
   motor      <- tolower(motor)
   motor      <- match.arg(motor)
   template   <- system.file(
@@ -76,12 +75,12 @@ informe_pdf <- function(motor = c("xelatex", "pdftex"), ...) {
 #'   de FISABIO (opción: `default`).
 #' @param template_xml Ruta hasta la plantilla XML de Pandoc. Por defecto se usa la
 #'   plantilla de FISABIO (opción: `default`).
-#' @param ... Otras opciones a usar en [rmarkdown::odt_document].
+#' @param ... Otras opciones a usar en [rmarkdown::odt_document()].
 #' @details La función solo funciona si el directorio de trabajo se circunscribe
-#'   a un proyecto de RStudio, es decir, si existe un archivo \emph{*.Rproj} en
+#'   a un proyecto de RStudio, es decir, si existe un archivo `*.Rproj` en
 #'   el directorio de trabajo. Si el proyecto se ha creado con
-#'   \code{\link{nuevo_proyecto}}, esto no debería causar molestias, pues se crea
-#'   un \emph{*.Rproj} por defecto.
+#'   [nuevo_proyecto()], esto no debería causar molestias, pues se crea
+#'   un `*.Rproj` por defecto.
 #'
 #'   La bibliografía se gestiona a través de `pandoc-citeproc` y un archivo `csl`
 #'   con el estilo (por defecto, estilo APA). Si quieres cambiar el estilo las
@@ -90,7 +89,7 @@ informe_pdf <- function(motor = c("xelatex", "pdftex"), ...) {
 #'
 #'   Con todo, en primer lugar la función comprueba que el proyecto tenga
 #'   declaradas todas estas opciones (vienen por defecto al emplear
-#'   \code{\link{nuevo_proyecto}}) y que el software apropiado esté instalado. Si
+#'   [nuevo_proyecto()]) y que el software apropiado esté instalado. Si
 #'   no hubiera un acuerdo entre lo esperado y lo declarado en las opciones del
 #'   proyecto, la función pregunta qué hacer para que, o bien se cambien las
 #'   opciones del proyecto de forma automática o se detenga la ejecución y se
@@ -149,13 +148,13 @@ informe_odt <- function(template = "default", template_xml = "default", ...) {
 #' @export
 #' @param template Ruta hasta la plantilla del documento. Por defecto se usa la plantilla
 #'   de FISABIO (opción: `default`).
-#' @param ... Otras opciones a usar en [rmarkdown::word_document].
+#' @param ... Otras opciones a usar en [rmarkdown::word_document()].
 #'
 #' @details La función solo funciona si el directorio de trabajo se circunscribe
-#'   a un proyecto de RStudio, es decir, si existe un archivo \emph{*.Rproj} en
+#'   a un proyecto de RStudio, es decir, si existe un archivo `*.Rproj` en
 #'   el directorio de trabajo. Si el proyecto se ha creado con
-#'   \code{\link{nuevo_proyecto}}, esto no debería causar molestias, pues se crea
-#'   un \emph{*.Rproj} por defecto.
+#'   [nuevo_proyecto()], esto no debería causar molestias, pues se crea
+#'   un `*.Rproj` por defecto.
 #'
 #'   La bibliografía se gestiona a través de pandoc-citeproc y un archivo csl
 #'   con el estilo (por defecto, estilo APA). Si quieres cambiar el estilo las
@@ -164,7 +163,7 @@ informe_odt <- function(template = "default", template_xml = "default", ...) {
 #'
 #'   Con todo, en primer lugar la función comprueba que el proyecto tenga
 #'   declaradas todas estas opciones (vienen por defecto al emplear
-#'   \code{\link{nuevo_proyecto}}) y que el software apropiado esté instalado. Si
+#'   [nuevo_proyecto()]) y que el software apropiado esté instalado. Si
 #'   no hubiera un acuerdo entre lo esperado y lo declarado en las opciones del
 #'   proyecto, la función pregunta qué hacer para que, o bien se cambien las
 #'   opciones del proyecto de forma automática o se detenga la ejecución y se
@@ -211,25 +210,25 @@ informe_docx <- function(template = "default", ...) {
 #' @param citation_package Paquete para gestionar las citas y referencias. Pandoc citeproc
 #'   ha dado problemas con Beamer, de forma que se restringe a natbib y biblatex (opción
 #'   por defecto).
-#' @param ... Otras opciones a usar en [rmarkdown::beamer_presentation]. No funciona con xelatex...
+#' @param ... Otras opciones a usar en [rmarkdown::beamer_presentation()]. No funciona con xelatex...
 #'
 #' @details La función solo funciona si el directorio de trabajo se circunscribe
-#'   a un proyecto de RStudio, es decir, si existe un archivo \emph{*.Rproj} en
+#'   a un proyecto de RStudio, es decir, si existe un archivo `*.Rproj` en
 #'   el directorio de trabajo. Si el proyecto se ha creado con
-#'   \code{\link{nuevo_proyecto}}, esto no debería causar molestias, pues se crea un
-#'   \emph{*.Rproj} por defecto.
+#'   [nuevo_proyecto()], esto no debería causar molestias, pues se crea un
+#'   `*.Rproj` por defecto.
 #'
-#'   Aunque la opción por defecto usa [tinytex::install_tinytex] para obtener una sesión
+#'   Aunque la opción por defecto usa [tinytex::install_tinytex()] para obtener una sesión
 #'   de LaTeX operativa, siempre se puede optar por usar una versión del SO, en cuyo caso
 #'   es necesario tenerla instalada.
 #'
 #'   El proceso genera un documento rmarkdown que produce un PDF tras ser
 #'   compilado con knitr y pdflatex La bibliografía se gestiona a través de
-#'   \code{biblatex}.
+#'   `biblatex`.
 #'
 #'   Con todo, en primer lugar la función comprueba que el proyecto tenga
 #'   declaradas todas estas opciones (vienen por defecto al emplear
-#'   \code{\link{nuevo_proyecto}}) y que el software apropiado esté instalado. Si
+#'   [nuevo_proyecto()]) y que el software apropiado esté instalado. Si
 #'   no hubiera un acuerdo entre lo esperado y lo declarado en las opciones del
 #'   proyecto, la función pregunta qué hacer para que, o bien se cambien las
 #'   opciones del proyecto de forma automática o se detenga la ejecución y se

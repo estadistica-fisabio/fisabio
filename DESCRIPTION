@@ -1,8 +1,8 @@
 Package: fisabio
 Type: Package
 Title: Funciones y Plantillas para el Servicio de Estudios Estadísticos de Fisabio
-Version: 0.1.9
-Date: 2026-02-19
+Version: 0.1.10
+Date: 2026-03-06
 Authors@R: 
     c(
         person(
@@ -21,9 +21,9 @@ Authors@R:
     )
 Maintainer: Carlos Vergara Hernández <carlos.vergara@fisabio.es>
 Description: Colección de funciones y plantillas de uso común en el Servicio de Estudios 
-    Estadísticos de FISABIO. Incluye la función 'nuevo_proyecto()' para crear una estructura
+    Estadísticos de FISABIO. Incluye la función para nuevo proyecto, creando una estructura
     unificada de directorios, archivos y funciones comunes, así como las funciones 
-    'informe_*()' para generar informes estadísticos en varios formatos.
+    de tipo informe para generar informes estadísticos en varios formatos.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: TRUE
@@ -33,14 +33,15 @@ Imports:
     git2r,
     knitr,
     rmarkdown,
-    here,
     renv,
+    gtsummary,
     officedown,
     officer,
     rstudioapi
-Suggest:
+Suggests:
+    here,
     tikzDevice,
-    gtsummary,
     flextable
 SystemRequirements: git
 RoxygenNote: 7.3.3
+Roxygen: list(markdown = TRUE)

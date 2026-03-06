@@ -10,21 +10,21 @@ informe_pdf(motor = c("xelatex", "pdftex"), ...)
 \arguments{
 \item{motor}{Motor de LaTeX. XeLaTeX por defecto.}
 
-\item{...}{Otros argumentos a pasar a [rmarkdown::pdf_document].}
+\item{...}{Otros argumentos a pasar a \code{\link[rmarkdown:pdf_document]{rmarkdown::pdf_document()}}.}
 }
 \value{
-Objeto con clase "rmarkdown_output_format".
+Objeto con clase \code{rmarkdown_output_format}.
 }
 \description{
 Esta función crea una lista con todas las especificaciones necesarias para
-crear un PDF siguiendo el formato de la plantilla de `fisabio`. Por defecto se
+crear un PDF siguiendo el formato de la plantilla de \code{fisabio}. Por defecto se
 usa XeLaTeX como motor de LaTeX (mejor trabajo con fuentes).
 }
 \details{
 La función solo debe utilizarse desde una llamada a
-  rmarkdown::render() o dentro de un documento .Rmd
+\code{\link[rmarkdown:render]{rmarkdown::render()}} o dentro de un documento .Rmd
 
-Aunque la opción por defecto usa [tinytex::install_tinytex] para obtener una sesión
+Aunque la opción por defecto usa \code{\link[tinytex:install_tinytex]{tinytex::install_tinytex()}} para obtener una sesión
 de LaTeX operativa, siempre se puede optar por usar una versión del SO, en cuyo caso
 es necesario tenerla instalada.
 }

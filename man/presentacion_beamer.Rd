@@ -11,12 +11,12 @@ presentacion_beamer(citation_package = c("biblatex", "natbib"), ...)
 ha dado problemas con Beamer, de forma que se restringe a natbib y biblatex (opción
 por defecto).}
 
-\item{...}{Otras opciones a usar en [rmarkdown::beamer_presentation]. No funciona con xelatex...}
+\item{...}{Otras opciones a usar en \code{\link[rmarkdown:beamer_presentation]{rmarkdown::beamer_presentation()}}. No funciona con xelatex...}
 }
 \value{
 Crea un documento principal y un conjunto de documentos de respaldo
-  (algunos directamente en el directorio de informes y otros en los
-  directorios de cache o figuras).
+(algunos directamente en el directorio de informes y otros en los
+directorios de cache o figuras).
 }
 \description{
 Crea automáticamente una presentación estadística en PDF -- R Markdown --
@@ -25,24 +25,24 @@ emplea formato R Markdown y tiene extensión .Rmd.
 }
 \details{
 La función solo funciona si el directorio de trabajo se circunscribe
-  a un proyecto de RStudio, es decir, si existe un archivo \emph{*.Rproj} en
-  el directorio de trabajo. Si el proyecto se ha creado con
-  \code{\link{nuevo_proyecto}}, esto no debería causar molestias, pues se crea un
-  \emph{*.Rproj} por defecto.
+a un proyecto de RStudio, es decir, si existe un archivo \verb{*.Rproj} en
+el directorio de trabajo. Si el proyecto se ha creado con
+\code{\link[=nuevo_proyecto]{nuevo_proyecto()}}, esto no debería causar molestias, pues se crea un
+\verb{*.Rproj} por defecto.
 
-  Aunque la opción por defecto usa [tinytex::install_tinytex] para obtener una sesión
-  de LaTeX operativa, siempre se puede optar por usar una versión del SO, en cuyo caso
-  es necesario tenerla instalada.
+Aunque la opción por defecto usa \code{\link[tinytex:install_tinytex]{tinytex::install_tinytex()}} para obtener una sesión
+de LaTeX operativa, siempre se puede optar por usar una versión del SO, en cuyo caso
+es necesario tenerla instalada.
 
-  El proceso genera un documento rmarkdown que produce un PDF tras ser
-  compilado con knitr y pdflatex La bibliografía se gestiona a través de
-  \code{biblatex}.
+El proceso genera un documento rmarkdown que produce un PDF tras ser
+compilado con knitr y pdflatex La bibliografía se gestiona a través de
+\code{biblatex}.
 
-  Con todo, en primer lugar la función comprueba que el proyecto tenga
-  declaradas todas estas opciones (vienen por defecto al emplear
-  \code{\link{nuevo_proyecto}}) y que el software apropiado esté instalado. Si
-  no hubiera un acuerdo entre lo esperado y lo declarado en las opciones del
-  proyecto, la función pregunta qué hacer para que, o bien se cambien las
-  opciones del proyecto de forma automática o se detenga la ejecución y se
-  cambien a mano.
+Con todo, en primer lugar la función comprueba que el proyecto tenga
+declaradas todas estas opciones (vienen por defecto al emplear
+\code{\link[=nuevo_proyecto]{nuevo_proyecto()}}) y que el software apropiado esté instalado. Si
+no hubiera un acuerdo entre lo esperado y lo declarado en las opciones del
+proyecto, la función pregunta qué hacer para que, o bien se cambien las
+opciones del proyecto de forma automática o se detenga la ejecución y se
+cambien a mano.
 }

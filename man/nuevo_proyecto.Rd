@@ -2,7 +2,7 @@
 % Please edit documentation in R/02_nuevo_proyecto.R
 \name{nuevo_proyecto}
 \alias{nuevo_proyecto}
-\title{Crea un nuevo proyecto con la estructura `fisabio`}
+\title{Crea un nuevo proyecto con la estructura \code{fisabio}}
 \usage{
 nuevo_proyecto(
   directorio = NULL,
@@ -17,11 +17,11 @@ nuevo_proyecto(
 \arguments{
 \item{directorio}{Cadena de caracteres indicando la ruta al directorio principal donde
 se creará el proyecto. Por defecto se escoge el directorio actual de trabajo,
-devuelto por la función [base::getwd()]. Si este argumento no esta vacío y el
+devuelto por la función \code{\link[base:getwd]{base::getwd()}}. Si este argumento no esta vacío y el
 directorio indicado no existe, la función tratará de crearlo de forma recursiva.}
 
 \item{nombre_proyecto}{Cadena de caracteres con el nombre a asignar al proyecto. Por
-defecto se asigna el nombre "fisabio_se_yyXXXX", donde `yy` es el año y XXXX es el
+defecto se asigna el nombre "fisabio_se_yyXXXX", donde \code{yy} es el año y XXXX es el
 código correlativo de proyecto para ese año. La función espera que cada proyecto esté
 ubicado en un directorio raíz destinado a proyectos vigentes y, en caso de que este
 argumento se deje en blanco y no se detecte la estructura que este directorio debería
@@ -29,16 +29,16 @@ tener, inicia una nueva cadena de proyecto (p. ej., para el primer proyecto del 
 2022: fisabio_se_220001).}
 
 \item{git}{Valor lógico (TRUE -opción por defecto- o FALSE), indicando si se desea
-generar un repositorio `git` asociado al proyecto.}
+generar un repositorio \code{git} asociado al proyecto.}
 
 \item{git_nombre}{Cadena de caracteres indicando el usuario vinculado al repositorio
-`git`. Por defecto se usa el nombre del servicio de estadística.}
+\code{git}. Por defecto se usa el nombre del servicio de estadística.}
 
 \item{git_correo}{Cadena de caracteres indicando el correo electrónico vinculado al
-repositorio `git`. Por defecto se indica el correo del servicio de estadística.}
+repositorio \code{git}. Por defecto se indica el correo del servicio de estadística.}
 
 \item{renv}{Valor lógico (TRUE o FALSE -opción por defecto- ), indicando si
-se desea generar un control de versiones de paquetes con [renv::init()]. En
+se desea generar un control de versiones de paquetes con \code{\link[renv:init]{renv::init()}}. En
 todo caso, es recomendable activarlo al finalizar el proyecto para archivar
 con las versiones correctas de los paquetes empleados.}
 
@@ -46,29 +46,23 @@ con las versiones correctas de los paquetes empleados.}
 desea abrir el nuevo proyecto en una nueva sesión de R-RStudio.}
 }
 \value{
-La función crea la siguiente estructura de directorios en directorio/nombre_proyecto/:
-  * r
-  * presupuestos
-  * pae
-  * informes
-  * datos
-      - brutos
-      - procesados
-      - documentacion
+La función crea la siguiente estructura de directorios en
+directorio/nombre_proyecto/: r, presupuestos, pae, informes, informes/extra,
+informes/figuras, datos, datos/brutos, datos/procesados, datos/documentacion.
 }
 \description{
-Crea automáticamente un proyecto siguiendo las directrices comunes de `fisabio`,
+Crea automáticamente un proyecto siguiendo las directrices comunes de \code{fisabio},
 empleando una jerarquía de directorios unificada, cargando archivos y funciones comunes
-del grupo de colaboradores. Opcionalmente, genera un repositorio `git` y un control de
-versiones de paquetes de `R` con `renv`.
+del grupo de colaboradores. Opcionalmente, genera un repositorio \code{git} y un control de
+versiones de paquetes de \code{R} con \code{renv}.
 }
 \details{
 La función crea la estructura de directorios a partir del nombre del proyecto
-  empleando minúsculas, con independencia de si el usuario ha introducido el argumento
-  con mayúsculas.
+empleando minúsculas, con independencia de si el usuario ha introducido el argumento
+con mayúsculas.
 
-  Los informes se almacenan, junto con sus figuras y datos de caché (si los hubiera),
-  en el directorio informes.
+Los informes se almacenan, junto con sus figuras y datos de caché (si los hubiera),
+en el directorio informes.
 }
 \examples{
 \dontrun{

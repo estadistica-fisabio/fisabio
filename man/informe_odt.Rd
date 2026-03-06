@@ -8,12 +8,12 @@ informe_odt(template = "default", template_xml = "default", ...)
 }
 \arguments{
 \item{template}{Ruta hasta la plantilla del documento. Por defecto se usa la plantilla
-de FISABIO (opción: `default`).}
+de FISABIO (opción: \code{default}).}
 
 \item{template_xml}{Ruta hasta la plantilla XML de Pandoc. Por defecto se usa la
-plantilla de FISABIO (opción: `default`).}
+plantilla de FISABIO (opción: \code{default}).}
 
-\item{...}{Otras opciones a usar en [rmarkdown::odt_document].}
+\item{...}{Otras opciones a usar en \code{\link[rmarkdown:odt_document]{rmarkdown::odt_document()}}.}
 }
 \value{
 Crea un documento principal y un conjunto de documentos de respaldo.
@@ -24,21 +24,21 @@ plantilla base con detalles del grupo.
 }
 \details{
 La función solo funciona si el directorio de trabajo se circunscribe
-  a un proyecto de RStudio, es decir, si existe un archivo \emph{*.Rproj} en
-  el directorio de trabajo. Si el proyecto se ha creado con
-  \code{\link{nuevo_proyecto}}, esto no debería causar molestias, pues se crea
-  un \emph{*.Rproj} por defecto.
+a un proyecto de RStudio, es decir, si existe un archivo \verb{*.Rproj} en
+el directorio de trabajo. Si el proyecto se ha creado con
+\code{\link[=nuevo_proyecto]{nuevo_proyecto()}}, esto no debería causar molestias, pues se crea
+un \verb{*.Rproj} por defecto.
 
-  La bibliografía se gestiona a través de `pandoc-citeproc` y un archivo `csl`
-  con el estilo (por defecto, estilo APA). Si quieres cambiar el estilo las
-  referencias, elimina el archivo `csl` que se genera por defecto y añade en su
-  lugar el que tu desees, cambiando la opción en el YAML del documento .Rmd.
+La bibliografía se gestiona a través de \code{pandoc-citeproc} y un archivo \code{csl}
+con el estilo (por defecto, estilo APA). Si quieres cambiar el estilo las
+referencias, elimina el archivo \code{csl} que se genera por defecto y añade en su
+lugar el que tu desees, cambiando la opción en el YAML del documento .Rmd.
 
-  Con todo, en primer lugar la función comprueba que el proyecto tenga
-  declaradas todas estas opciones (vienen por defecto al emplear
-  \code{\link{nuevo_proyecto}}) y que el software apropiado esté instalado. Si
-  no hubiera un acuerdo entre lo esperado y lo declarado en las opciones del
-  proyecto, la función pregunta qué hacer para que, o bien se cambien las
-  opciones del proyecto de forma automática o se detenga la ejecución y se
-  cambien a mano.
+Con todo, en primer lugar la función comprueba que el proyecto tenga
+declaradas todas estas opciones (vienen por defecto al emplear
+\code{\link[=nuevo_proyecto]{nuevo_proyecto()}}) y que el software apropiado esté instalado. Si
+no hubiera un acuerdo entre lo esperado y lo declarado en las opciones del
+proyecto, la función pregunta qué hacer para que, o bien se cambien las
+opciones del proyecto de forma automática o se detenga la ejecución y se
+cambien a mano.
 }

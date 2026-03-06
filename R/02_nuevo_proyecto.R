@@ -36,15 +36,9 @@
 #'
 #'   Los informes se almacenan, junto con sus figuras y datos de caché (si los hubiera),
 #'   en el directorio informes.
-#' @return La función crea la siguiente estructura de directorios en directorio/nombre_proyecto/:
-#'   * r
-#'   * presupuestos
-#'   * pae
-#'   * informes
-#'   * datos
-#'       - brutos
-#'       - procesados
-#'       - documentacion
+#' @return La función crea la siguiente estructura de directorios en
+#'   directorio/nombre_proyecto/: r, presupuestos, pae, informes, informes/extra,
+#'   informes/figuras, datos, datos/brutos, datos/procesados, datos/documentacion.
 #' @examples
 #' \dontrun{
 #' library(fisabio)
@@ -68,6 +62,7 @@ nuevo_proyecto <- function(
 
   stopifnot(is.logical(git))
   stopifnot(is.logical(renv))
+  stopifnot(is.logical(abrir_proyecto), length(abrir_proyecto) == 1L)
 
   if (is.null(directorio)) {
     directorio <- getwd()
@@ -329,8 +324,7 @@ nuevo_proyecto <- function(
 
   message("No olvides editar el archivo README para describir el proyecto.")
 
-  Sys.sleep(3)
-  if (abrir_proyecto & rstudioapi::isAvailable()) {
+  if (abrir_proyecto && rstudioapi::isAvailable()) {
     rstudioapi::openProject(
       path       = file.path(ruta_trabajo, paste0(nombre_proyecto, ".Rproj")),
       newSession = TRUE
