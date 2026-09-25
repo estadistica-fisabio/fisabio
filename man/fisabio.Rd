@@ -22,6 +22,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Carlos Vergara-Hernández \email{carlos.vergara@fisabio.es} (\href{https://orcid.org/0000-0002-7263-856X}{ORCID})
   \item Ana Escrig-Pérez \email{ana.escrig@fisabio.es}
 }
 

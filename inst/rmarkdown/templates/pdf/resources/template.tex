@@ -121,9 +121,9 @@
 	\tiny
 	\begin{tabular}[b]{c}
 		Página \thepage \space de \pageref*{LastPage}  \\
-		\color{red}FUNDACIÓ PER AL FOMENT DE LA INVESTIGACIÓ SANITÀRIA I BIOMÈDICA DE LA COMUNITAT VALENCIANA (FISABIO).  \\
-		\color{red}C/ Misser Mascó nº 31. 46010 València. CIF.: G98073760 Inscrita Registre fundacions: 501 V  \\
-		\href{www.fisabio.san.gva.es}{\color{red}www.fisabio.san.gva.es}
+		\color{black}FUNDACIÓ PER AL FOMENT DE LA INVESTIGACIÓ SANITÀRIA I BIOMÈDICA DE LA COMUNITAT VALENCIANA (FISABIO).  \\
+		\color{black}C/ Misser Mascó nº 31. 46010 València. CIF.: G98073760 Inscrita Registre fundacions: 501 V  \\
+		\href{https://fisabio.san.gva.es/es/}{\color{black}fisabio.san.gva.es/es/}
 	\end{tabular}%
 }
 \fancypagestyle{plain}{
@@ -136,9 +136,9 @@
 		\tiny
 		\begin{tabular}[b]{c}
 			Página \thepage \space de \pageref*{LastPage}  \\
-			\color{red}FUNDACIÓ PER AL FOMENT DE LA INVESTIGACIÓ SANITÀRIA I BIOMÈDICA DE LA COMUNITAT VALENCIANA (FISABIO).  \\
-			\color{red}C/ Misser Mascó nº 31. 46010 València. CIF.: G98073760 Inscrita Registre fundacions: 501 V  \\
-			\href{www.fisabio.san.gva.es}{\color{red}www.fisabio.san.gva.es}
+			\color{black}FUNDACIÓ PER AL FOMENT DE LA INVESTIGACIÓ SANITÀRIA I BIOMÈDICA DE LA COMUNITAT VALENCIANA (FISABIO).  \\
+			\color{black}C/ Misser Mascó nº 31. 46010 València. CIF.: G98073760 Inscrita Registre fundacions: 501 V  \\
+	  	\href{https://fisabio.san.gva.es/es/}{\color{black}fisabio.san.gva.es/es/}
 		\end{tabular}%
 	}
 }
@@ -349,7 +349,18 @@ $endfor$
 		$abstract$
 	\end{abstract}
 	$endif$
+
+	$if(toc)$
+  $if(toc-title)$
+  \renewcommand*\contentsname{$toc-title$}
+  $endif$
+  \setcounter{tocdepth}{$toc-depth$}
+  \tableofcontents
+  \newpage
+  $endif$
+
 	\setlength\parindent{.5cm}
 	$body$
+
 
 \end{document}
